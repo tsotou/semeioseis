@@ -1,0 +1,2465 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ελληνικό Χειρόγραφο Χαρτί</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@500;600;700&family=Comfortaa:wght@400;500;600&family=Inter:wght@400;500;600&family=Marck+Script&family=Pangolin&family=Patrick+Hand&family=Playpen+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{--s900:#1c1917;--s800:#292524;--s700:#44403c;--s600:#57534e;--s500:#78716c;--s400:#a8a29e;--s300:#d6d3d1;--s200:#e7e5e4;--amber:#92400e;--amber2:#b45309}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:100vh;font-family:Inter,system-ui,sans-serif;color:var(--s800);background-color:#e6e2da;background-image:radial-gradient(circle at 50% 0%,rgba(255,255,255,.45),rgba(0,0,0,.06));overflow-x:hidden}
+.hidden{display:none!important}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+input,select{font:inherit;color:inherit}
+::selection{background:rgba(253,230,138,.6)}
+
+/* Fonts */
+.font-caveat{font-family:Caveat,cursive}
+.font-badscript{font-family:'Bad Script',cursive}
+.font-marck{font-family:'Marck Script',cursive}
+.font-pangolin{font-family:Pangolin,cursive}
+.font-playpen{font-family:'Playpen Sans',cursive}
+.font-patrick{font-family:'Patrick Hand',cursive}
+.font-comfortaa{font-family:Comfortaa,sans-serif}
+
+/* Generic UI */
+.btn{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 14px;font-size:12px;font-weight:500;transition:.15s;white-space:nowrap}
+.btn-dark{background:var(--s800);color:#fff}.btn-dark:hover{background:var(--s700)}
+.btn-amber{background:var(--amber);color:#fff}.btn-amber:hover{background:var(--amber2)}
+.btn-soft{background:rgba(255,255,255,.8);border:1px solid rgba(168,162,158,.6)}.btn-soft:hover{background:#fff}
+.btn-danger{background:#b91c1c;color:#fff}.btn-danger:hover{background:#dc2626}
+.icon-btn{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;color:var(--s500);flex:none;transition:.15s}
+.icon-btn:hover{background:rgba(231,229,228,.9);color:var(--s900)}
+.icon-btn.danger:hover{background:#fee2e2;color:#dc2626}
+.icon-btn.active{background:rgba(231,229,228,.9);color:var(--s800)}
+.sep{width:1px;height:14px;background:rgba(214,211,209,.9);flex:none}
+.tb-select{background:transparent;border:0;border-radius:999px;padding:4px 6px;font-size:12px;cursor:pointer;color:var(--s700)}
+.tb-select:hover{background:rgba(231,229,228,.6)}
+
+/* Home */
+#homeHeader{position:sticky;top:0;z-index:30;padding:12px 20px;background:rgba(230,226,218,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(168,162,158,.3);display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between}
+.hrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.search{position:relative;min-width:200px;flex:1}
+.search i{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--s400)}
+.search input{width:100%;min-width:220px;padding:6px 12px 6px 30px;border-radius:999px;border:1px solid rgba(168,162,158,.5);background:rgba(255,255,255,.85);font-size:12px}
+.search input:focus{outline:2px solid rgba(180,83,9,.35);background:#fff}
+.seg{display:flex;align-items:center;background:rgba(255,255,255,.8);padding:3px;border-radius:999px;border:1px solid rgba(214,211,209,.9)}
+.seg button{padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px;color:var(--s600)}
+.seg button.on{background:var(--s800);color:#fff}
+.container{max-width:1152px;margin:0 auto;padding:24px 20px 64px}
+.container section{margin-bottom:34px}
+.sec-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.sec-head h2{margin:0;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--s500);display:flex;gap:6px;align-items:center}
+.tabs{display:flex;gap:4px}
+.tab{padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;color:var(--s600);border:1px solid transparent}
+.tab:hover{background:rgba(255,255,255,.6)}
+.tab.on{background:#fff;border-color:rgba(168,162,158,.5);color:var(--s900)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{padding:3px 10px;border-radius:999px;font-size:11px;background:rgba(255,255,255,.7);border:1px solid rgba(168,162,158,.45);color:var(--s700)}
+.chip:hover{background:#fff}
+.chip.on{background:var(--amber);color:#fff;border-color:var(--amber)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.grid.boards{gap:14px}
+.banner{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:rgba(255,251,235,.95);border:1px solid rgba(252,211,77,.8);color:#78350f;border-radius:12px;padding:10px 14px;font-size:12px;margin-bottom:22px}
+.banner .grow{flex:1;min-width:200px}
+.empty{text-align:center;color:var(--s500);padding:50px 10px;font-size:13px}
+
+.doc-card{position:relative;height:16rem;border-radius:8px;overflow:hidden;border:1px solid rgba(168,162,158,.4);box-shadow:0 1px 2px rgba(0,0,0,.06);display:flex;flex-direction:column;text-align:left;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.doc-card:hover{transform:translateY(-3px);box-shadow:0 14px 28px -8px rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.08)}
+.doc-card:focus{outline:2px solid var(--s700)}
+.card-body{position:relative;z-index:2;flex:1;padding:14px 16px 0;overflow:hidden}
+.card-title{font-size:23px;line-height:26px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-title .untitled{opacity:.4;font-weight:500;font-style:italic}
+.card-tags{display:flex;gap:4px;flex-wrap:nowrap;overflow:hidden;margin:3px 0 4px;height:18px}
+.card-tags span{font:500 10px Inter,sans-serif;padding:1px 7px;border-radius:999px;background:rgba(0,0,0,.07);white-space:nowrap;color:var(--s700)}
+.card-preview{font-size:19px;line-height:24px;white-space:pre-wrap;overflow:hidden;word-break:break-word}
+.card-preview .ghost{opacity:.35;font-style:italic}
+.card-fade{position:absolute;left:0;right:0;bottom:22px;height:34px;pointer-events:none;z-index:3}
+.card-meta{position:relative;z-index:4;display:flex;justify-content:space-between;gap:8px;padding:4px 12px;font-size:10px;background:rgba(0,0,0,.04)}
+.card-actions{position:absolute;top:6px;right:6px;z-index:6;display:flex;gap:4px}
+.card-actions button{height:24px;padding:0 9px;border-radius:999px;background:rgba(255,255,255,.9);font-size:11px;font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,.15);display:flex;align-items:center;gap:5px}
+.card-actions button:hover{background:#fff}
+.card-actions button.danger:hover{background:#fee2e2;color:#b91c1c}
+.card-actions button.confirm{background:#b91c1c;color:#fff}
+.board-card{background:rgba(255,255,255,.85);border:1px solid rgba(168,162,158,.7);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;cursor:pointer;transition:.18s;position:relative}
+.board-card:hover{background:#fff;transform:translateY(-3px);box-shadow:0 12px 24px -8px rgba(0,0,0,.18)}
+.board-card .bt{display:flex;align-items:center;gap:8px;min-width:0}
+.board-card .bi{width:28px;height:28px;border-radius:8px;background:#fef3c7;color:var(--amber);display:flex;align-items:center;justify-content:center;flex:none;font-size:12px}
+.board-card h3{margin:0;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.board-card .bm{display:flex;justify-content:space-between;font-size:11px;color:var(--s500)}
+.board-card .bm b{color:var(--amber);font-weight:500}
+.board-card .del{position:absolute;top:8px;right:8px;opacity:0}
+.board-card:hover .del{opacity:1}
+
+/* Toolbar */
+#showToolbarPill{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:40;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.8);backdrop-filter:blur(12px);border:1px solid rgba(214,211,209,.9);box-shadow:0 1px 3px rgba(0,0,0,.1);font-size:11px;font-weight:500;color:var(--s600);display:flex;align-items:center;gap:6px}
+#minimalToolbar{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:40;max-width:97vw;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.93);backdrop-filter:blur(12px);border:1px solid rgba(214,211,209,.9);box-shadow:0 4px 8px -1px rgba(0,0,0,.12);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;color:var(--s600);font-size:12px;transition:opacity .35s}
+body.is-writing #minimalToolbar:not(:hover):not(:focus-within){opacity:.32}
+.tb-btn{padding:4px 10px;border-radius:999px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:6px;flex:none;white-space:nowrap;transition:.15s}
+.tb-btn.light{background:rgba(231,229,228,.85);color:var(--s800)}.tb-btn.light:hover{background:rgba(214,211,209,.9)}
+.tb-btn.plain:hover{background:rgba(231,229,228,.7)}
+.tb-btn.dark{background:var(--s800);color:#fff}.tb-btn.dark:hover{background:var(--s700)}
+.tb-btn.amber{background:var(--amber);color:#fff}.tb-btn.amber:hover{background:var(--amber2)}
+#boardNameWrap{display:flex;align-items:center;gap:6px;background:rgba(255,251,235,.95);border:1px solid rgba(252,211,77,.8);border-radius:999px;padding:2px 10px;flex:none}
+#boardNameWrap input{background:transparent;border:0;width:140px;font-size:12px;font-weight:600}
+#boardNameWrap input:focus{outline:none}
+.group{display:flex;align-items:center;gap:4px;flex:none}
+.dot{width:16px;height:16px;border-radius:50%;border:1px solid var(--s300);transition:transform .15s;flex:none;position:relative;overflow:hidden}
+.dot:hover{transform:scale(1.12)}
+.dot.sel{box-shadow:0 0 0 1px #fff,0 0 0 2px var(--s500)}
+.dot.custom{border-style:dashed;border-color:var(--s400);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--s500);cursor:pointer}
+.dot.custom input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
+#fontSizeRange{width:56px;accent-color:var(--s600);height:4px}
+@media(max-width:900px){
+  #minimalToolbar{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;left:8px;right:8px;transform:none;max-width:none;border-radius:16px;scrollbar-width:none}
+  #minimalToolbar::-webkit-scrollbar{display:none}
+  #minimalToolbar>*{flex:none}
+  #homeHeader{padding:10px 12px}
+}
+
+/* Paper */
+.paper-sheet{--paper-bg:#fdfbf7;--rule-line:rgba(30,58,138,.15);--margin-line:rgba(220,38,38,.3);--line-step:36px;--paper-pad-top:8px;--margin-x:2.4rem;background-color:var(--paper-bg);box-shadow:0 12px 30px -8px rgba(0,0,0,.2),0 2px 8px rgba(0,0,0,.08),inset 0 0 45px rgba(0,0,0,.03);transition:box-shadow .2s,background-color .25s;border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.paper-sheet.clip{position:absolute}
+.paper-sheet.is-active{box-shadow:0 22px 48px -10px rgba(0,0,0,.32),0 0 0 2px rgba(120,113,108,.45),inset 0 0 45px rgba(0,0,0,.03)}
+.paper-sheet.is-dragging{cursor:grabbing!important;box-shadow:0 30px 60px -12px rgba(0,0,0,.38),0 0 0 2px rgba(120,113,108,.55);transition:none}
+.paper-texture{position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E")}
+.ruled{position:relative;z-index:1;flex:1;display:flex;flex-direction:column}
+.paper-lined{background-image:linear-gradient(to bottom,transparent calc(100% - 1px),var(--rule-line) 1px);background-size:100% var(--line-step);background-position:0 var(--paper-pad-top)}
+.paper-grid{background-image:linear-gradient(to right,var(--rule-line) 1px,transparent 1px),linear-gradient(to bottom,var(--rule-line) 1px,transparent 1px);background-size:24px 24px;background-position:0 var(--paper-pad-top)}
+.paper-dotted{background-image:radial-gradient(var(--rule-line) 1.35px,transparent 1.35px);background-size:24px 24px;background-position:12px 12px}
+.paper-blank{background-image:none}
+.notebook-margin::before{content:'';position:absolute;top:0;bottom:0;left:var(--margin-x);width:1.5px;background:var(--margin-line);pointer-events:none;z-index:5}
+.note-editor{flex:1;position:relative;z-index:10;padding:8px 14px 28px 3.1rem;background:transparent;outline:none;letter-spacing:.025em;word-wrap:break-word;overflow-wrap:break-word;white-space:pre-wrap;-webkit-user-select:text;user-select:text}
+.note-editor p,.note-editor div{margin:0;padding:0;min-height:1em}
+.note-editor ul{list-style:disc;padding-left:1.5rem;margin:0}
+.note-editor ol{list-style:decimal;padding-left:1.5rem;margin:0}
+
+/* Clipboard sheet strip */
+.paper-drag-strip{position:relative;z-index:20;height:24px;width:100%;cursor:grab;display:flex;align-items:center;justify-content:center;flex:none}
+.paper-drag-strip .grip{width:36px;height:4px;border-radius:99px;background:rgba(120,113,108,.3);opacity:0;transition:opacity .2s}
+.strip-title{position:absolute;left:10px;right:56px;top:0;height:24px;line-height:24px;font:600 11px Inter,sans-serif;color:rgba(68,64,60,.65);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.strip-btns{position:absolute;right:4px;top:3px;display:flex;gap:2px;opacity:0;transition:opacity .2s}
+.strip-btns button{width:18px;height:18px;border-radius:50%;font-size:9px;color:var(--s500);display:flex;align-items:center;justify-content:center}
+.strip-btns button:hover{background:rgba(214,211,209,.85)}
+.paper-sheet:hover .grip,.paper-sheet.is-active .grip,.paper-sheet:hover .strip-btns,.paper-sheet.is-active .strip-btns{opacity:1}
+.paper-resize-handle{position:absolute;bottom:4px;right:4px;z-index:20;width:16px;height:16px;display:flex;align-items:flex-end;justify-content:flex-end;padding:2px;color:rgba(120,113,108,.6);pointer-events:none;opacity:0;transition:opacity .2s}
+.paper-sheet:hover .paper-resize-handle,.paper-sheet.is-active .paper-resize-handle{opacity:.65}
+.resize-edge{position:absolute;z-index:25}
+.resize-n{top:-4px;left:10px;right:10px;height:8px;cursor:ns-resize}
+.resize-s{bottom:-4px;left:10px;right:10px;height:8px;cursor:ns-resize}
+.resize-w{left:-4px;top:10px;bottom:10px;width:8px;cursor:ew-resize}
+.resize-e{right:-4px;top:10px;bottom:10px;width:8px;cursor:ew-resize}
+.resize-nw{top:-5px;left:-5px;width:12px;height:12px;cursor:nwse-resize}
+.resize-ne{top:-5px;right:-5px;width:12px;height:12px;cursor:nesw-resize}
+.resize-sw{bottom:-5px;left:-5px;width:12px;height:12px;cursor:nesw-resize}
+.resize-se{bottom:-5px;right:-5px;width:14px;height:14px;cursor:nwse-resize}
+@media(pointer:coarse){.paper-drag-strip{height:30px}.strip-title{height:30px;line-height:30px}.paper-drag-strip .grip,.strip-btns{opacity:1}.strip-btns{top:6px}.strip-btns button{width:22px;height:22px}}
+
+/* Fullscreen */
+#fullscreenView{min-height:100vh;width:100%;padding:64px 16px 48px;display:flex;justify-content:center}
+#fullscreenPaperSheet{position:relative;width:100%;max-width:56rem;min-height:82vh;--line-step:36px;--margin-x:3rem}
+#fullscreenPaperSheet .note-editor{padding:8px 24px 40px 4rem}
+.fs-head{position:relative;z-index:12;padding:22px 24px 8px 4rem}
+.title-input{width:100%;background:transparent;border:0;border-bottom:1px dashed rgba(120,113,108,.35);padding:2px 0 6px;font-weight:700;outline:none}
+.title-input::placeholder{opacity:.35;font-weight:500}
+.tag-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px}
+.tag{display:inline-flex;align-items:center;gap:4px;font:500 11px Inter,sans-serif;padding:2px 4px 2px 9px;border-radius:999px;background:rgba(0,0,0,.07);color:var(--s700)}
+.tag button{width:15px;height:15px;border-radius:50%;font-size:9px;color:var(--s500)}
+.tag button:hover{background:rgba(0,0,0,.12)}
+#tagInput{background:transparent;border:0;font:500 11px Inter,sans-serif;width:110px;outline:none;padding:3px 2px}
+#tagInput::placeholder{color:var(--s500);opacity:.7}
+.fs-foot{position:relative;z-index:12;display:flex;flex-wrap:wrap;gap:6px 16px;padding:8px 24px 10px 4rem;font-size:11px;color:var(--s500);border-top:1px solid rgba(120,113,108,.12);background:rgba(0,0,0,.02)}
+.fs-foot i{margin-right:4px}
+@media(max-width:640px){
+  #fullscreenView{padding:58px 6px 30px}
+  #fullscreenPaperSheet{--margin-x:2rem}
+  #fullscreenPaperSheet .note-editor{padding:8px 12px 40px 2.8rem}
+  .fs-head{padding:16px 12px 6px 2.8rem}
+  .fs-foot{padding:8px 12px 10px 2.8rem}
+}
+
+/* Clipboard world */
+#clipboardViewport{position:fixed;inset:0;overflow:hidden;cursor:grab;touch-action:none}
+#clipboardViewport.is-panning{cursor:grabbing}
+#deskStage{position:absolute;top:0;left:0;width:10000px;height:10000px;transform-origin:0 0;background-image:radial-gradient(rgba(120,113,108,.18) 1.25px,transparent 1.25px);background-size:32px 32px}
+#deskCanvas{position:relative;width:100%;height:100%}
+#zoomControls{position:fixed;bottom:20px;left:20px;z-index:40;display:flex;align-items:center;gap:4px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border:1px solid rgba(214,211,209,.9);box-shadow:0 4px 8px -1px rgba(0,0,0,.12);font-size:12px;color:var(--s700)}
+#zoomControls .zl{padding:0 8px;min-width:46px;text-align:center;font-weight:500;user-select:none}
+#zoomControls .zb{padding:4px 8px;border-radius:999px;display:flex;align-items:center;gap:4px}
+#zoomControls .zb:hover{background:rgba(231,229,228,.8)}
+@media(max-width:640px){#zoomControls .zt{display:none}#zoomControls{left:8px;bottom:10px}}
+
+/* Modals */
+.modal-backdrop{position:fixed;inset:0;z-index:50;background:rgba(28,25,23,.45);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{background:#fdfbf7;border:1px solid var(--s300);border-radius:16px;box-shadow:0 25px 50px -12px rgba(0,0,0,.35);max-width:48rem;width:100%;max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.modal.small{max-width:30rem;padding:20px}
+.modal.small h3{margin:0 0 8px;font-size:16px}
+.modal.small p{margin:0 0 12px;font-size:13px;color:var(--s600);line-height:1.5}
+.modal-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-top:6px}
+.mh{padding:14px 20px;border-bottom:1px solid var(--s200);background:rgba(255,255,255,.85);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.mh .name{display:flex;align-items:center;gap:8px;flex:1;min-width:200px;color:var(--amber)}
+.mh .name input{width:100%;background:rgba(245,245,244,.8);border:1px solid var(--s300);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500}
+.mh .name input:focus{outline:2px solid rgba(180,83,9,.4);background:#fff}
+.ms{padding:10px 20px;background:rgba(245,245,244,.7);border-bottom:1px solid var(--s200);display:flex;align-items:center;gap:8px}
+.ms .search{flex:1}
+.mf{padding:12px 20px;border-top:1px solid var(--s200);background:rgba(255,255,255,.9);display:flex;justify-content:space-between;align-items:center}
+#pickerNotesGrid{padding:18px;overflow-y:auto;display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));flex:1}
+.pick{position:relative;height:9rem;border-radius:8px;padding:10px 12px;text-align:left;border:1px solid var(--s300);display:flex;flex-direction:column;overflow:hidden;opacity:.85;transition:.15s}
+.pick:hover{opacity:1;border-color:var(--s400)}
+.pick.sel{opacity:1;border-color:var(--amber);box-shadow:0 0 0 2px var(--amber)}
+.pick .pb{align-self:flex-end;width:20px;height:20px;border-radius:50%;border:1px solid rgba(168,162,158,.7);background:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;flex:none}
+.pick.sel .pb{background:var(--amber);border-color:var(--amber)}
+.pick .pt{font-weight:700;font-size:19px;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pick .px{font-size:16px;line-height:19px;overflow:hidden;white-space:pre-wrap}
+
+/* Sync */
+.sync-btn .fa-cloud{font-size:11px}
+.sync-btn[data-state="ok"] i{color:#047857}
+.sync-btn[data-state="syncing"] i,.sync-btn[data-state="pending"] i{color:var(--amber2)}
+.sync-btn[data-state="error"] i,.sync-btn[data-state="offline"] i{color:#b91c1c}
+.sync-btn[data-state="signedout"] i,.sync-btn[data-state="off"] i{color:var(--s400)}
+.field{display:block;width:100%;padding:8px 12px;border-radius:10px;border:1px solid var(--s300);background:#fff;font-size:13px;margin-bottom:8px}
+.field:focus{outline:2px solid rgba(180,83,9,.35)}
+.auth-msg{font-size:12px;min-height:16px;margin:2px 0 8px;color:var(--s600)}
+.auth-msg.err{color:#b91c1c}
+
+/* Toast */
+#toast{position:fixed;bottom:20px;right:20px;z-index:60;background:rgba(41,37,36,.93);color:#fff;padding:8px 14px;border-radius:999px;font-size:12px;display:flex;align-items:center;gap:12px;transform:translateY(90px);opacity:0;transition:all .3s;pointer-events:none;max-width:calc(100vw - 40px)}
+#toast.show{transform:none;opacity:1}
+#toast.has-action{pointer-events:auto}
+#toastAction{font-weight:600;color:#fcd34d;white-space:nowrap}
+
+/* Print */
+@media print{
+  body{background:#fff!important}
+  #homeHeader,#minimalToolbar,#showToolbarPill,#toast,#zoomControls,.no-print,.paper-drag-strip,.paper-resize-handle,.fs-foot{display:none!important}
+  .paper-sheet{box-shadow:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="homeView" class="hidden">
+  <div id="homeHeader">
+    <div class="hrow" style="flex:1">
+      <button type="button" id="homeNewNoteBtn" class="btn btn-dark" title="Νέα σημείωση (Ctrl+Alt+N)"><i class="fa-solid fa-plus"></i><span>Νέα σημείωση</span></button>
+      <button type="button" id="homeNewBoardBtn" class="btn btn-amber" title="Νέο θεματικό Clipboard"><i class="fa-solid fa-clipboard-list"></i><span>Νέο Clipboard</span></button>
+      <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input type="search" id="searchInput" placeholder="Αναζήτηση σε τίτλους, κείμενο, ετικέτες… ( / )"></div>
+    </div>
+    <div class="hrow">
+      <select id="sortSelect" class="tb-select" title="Ταξινόμηση" style="background:rgba(255,255,255,.8);border:1px solid rgba(214,211,209,.9)">
+        <option value="updated">Τελευταία αλλαγή</option>
+        <option value="created-desc">Νεότερες πρώτα</option>
+        <option value="created-asc">Παλαιότερες πρώτα</option>
+        <option value="title">Τίτλος Α → Ω</option>
+      </select>
+      <button type="button" id="syncBtn" class="btn btn-soft sync-btn" data-state="off" title="Συγχρονισμός μεταξύ συσκευών"><i class="fa-solid fa-cloud"></i><span id="syncBtnText">Σύνδεση</span></button>
+      <button type="button" id="exportBtn" class="btn btn-soft" title="Λήψη αντιγράφου ασφαλείας (.json)"><i class="fa-solid fa-download"></i><span>Αντίγραφο</span></button>
+      <button type="button" id="importBtn" class="btn btn-soft" title="Εισαγωγή αντιγράφου ασφαλείας"><i class="fa-solid fa-upload"></i><span>Εισαγωγή</span></button>
+      <input type="file" id="importFile" accept=".json,application/json" class="hidden">
+      <div class="seg">
+        <button type="button" id="modeListBtn" class="on"><i class="fa-solid fa-table-cells-large" style="font-size:10px"></i><span>Σημειώσεις</span></button>
+        <button type="button" id="modeClipboardBtn" title="Όλες οι σημειώσεις σε ελεύθερο πίνακα"><i class="fa-solid fa-clipboard" style="font-size:11px"></i><span>Όλα στο Clipboard</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="backupBanner" class="banner hidden">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span class="grow" id="backupBannerText"></span>
+      <button type="button" id="bannerExportBtn" class="btn btn-dark">Λήψη αντιγράφου</button>
+      <button type="button" id="bannerDismissBtn" class="icon-btn" title="Απόκρυψη"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <section id="savedBoardsSection" class="hidden">
+      <div class="sec-head"><h2><i class="fa-solid fa-thumbtack" style="font-size:10px"></i><span>Αποθηκευμένα Clipboards (Bits / Ενότητες)</span></h2></div>
+      <div id="savedBoardsGrid" class="grid boards"></div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <div class="tabs">
+          <button type="button" class="tab on" id="tabActive">Σημειώσεις</button>
+          <button type="button" class="tab" id="tabArchive">Αρχείο</button>
+        </div>
+        <span id="totalNotesCount" style="font-size:11px;color:var(--s500)"></span>
+      </div>
+      <div id="tagFilterBar" class="chips"></div>
+      <div id="notesListGrid" class="grid"></div>
+      <div id="emptyState" class="empty hidden"></div>
+    </section>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<button type="button" id="showToolbarPill" class="no-print hidden" title="Εμφάνιση μενού (Ctrl+Shift+M)"><i class="fa-solid fa-chevron-down" style="font-size:9px"></i><span>Μενού</span></button>
+
+<header id="minimalToolbar" class="no-print hidden">
+  <button type="button" id="backToListBtn" class="tb-btn light" title="Πίσω στην αρχική (Esc)"><i class="fa-solid fa-arrow-left" style="font-size:10px"></i><span>Πίσω</span></button>
+
+  <div id="boardNameWrap" class="hidden">
+    <i class="fa-solid fa-pen" style="font-size:9px;color:var(--amber)"></i>
+    <input type="text" id="boardTitleInput" placeholder="Όνομα Clipboard...">
+  </div>
+
+  <button type="button" id="pickNotesForBoardBtn" class="tb-btn amber hidden" title="Ποιες σημειώσεις εμφανίζονται σε αυτό το Clipboard"><i class="fa-solid fa-list-check" style="font-size:10px"></i><span>Επιλογή σημειώσεων</span></button>
+  <button type="button" id="addNoteBtn" class="tb-btn dark hidden" title="Νέο χαρτί (Ctrl+Alt+N)"><i class="fa-solid fa-plus" style="font-size:10px"></i><span>Νέο χαρτί</span></button>
+  <button type="button" id="fullscreenToClipboardBtn" class="tb-btn plain hidden" title="Μετάβαση στο Clipboard"><i class="fa-solid fa-clipboard" style="font-size:10px"></i><span>Clipboard</span></button>
+
+  <span class="sep"></span>
+
+  <select id="fontSelect" class="tb-select" title="Γραμματοσειρά (με επιλεγμένο κείμενο αλλάζει μόνο την επιλογή)">
+    <option value="font-caveat">Caveat</option>
+    <option value="font-badscript">Bad Script</option>
+    <option value="font-marck">Marck Script</option>
+    <option value="font-pangolin">Pangolin</option>
+    <option value="font-playpen">Playpen Sans</option>
+    <option value="font-patrick">Patrick Hand</option>
+    <option value="font-comfortaa">Comfortaa</option>
+  </select>
+
+  <span class="sep"></span>
+
+  <div id="inkPalette" class="group" title="Χρώμα μελανιού (με επιλεγμένο κείμενο αλλάζει μόνο την επιλογή)">
+    <button type="button" class="dot ink-btn" data-ink="#1d4ed8" title="Μπλε" style="background:#1d4ed8"></button>
+    <button type="button" class="dot ink-btn" data-ink="#111827" title="Μαύρο" style="background:#111827"></button>
+    <button type="button" class="dot ink-btn" data-ink="#b91c1c" title="Κόκκινο" style="background:#b91c1c"></button>
+    <button type="button" class="dot ink-btn" data-ink="#047857" title="Πράσινο" style="background:#047857"></button>
+    <button type="button" class="dot ink-btn" data-ink="#6d28d9" title="Μωβ" style="background:#6d28d9"></button>
+  </div>
+
+  <span class="sep"></span>
+
+  <div id="paperColorPalette" class="group">
+    <button type="button" class="dot paper-color-btn" data-paper-bg="#ffffff" data-paper-name="Κλασικό Λευκό" title="Κλασικό Λευκό" style="background:#ffffff"></button>
+    <button type="button" class="dot paper-color-btn" data-paper-bg="#fdfbf7" data-paper-name="Κρεμ / Ιβουάρ" title="Κρεμ / Ιβουάρ" style="background:#fdfbf7"></button>
+    <button type="button" class="dot paper-color-btn" data-paper-bg="#f4ebd9" data-paper-name="Παλαιωμένη Περγαμηνή" title="Παλαιωμένη Περγαμηνή" style="background:#f4ebd9"></button>
+    <button type="button" class="dot paper-color-btn" data-paper-bg="#fef6c9" data-paper-name="Κίτρινο Σημειωματάριο" title="Κίτρινο Σημειωματάριο" style="background:#fef6c9"></button>
+    <button type="button" class="dot paper-color-btn" data-paper-bg="#fce8eb" data-paper-name="Απαλό Ροζ" title="Απαλό Ροζ" style="background:#fce8eb"></button>
+    <button type="button" class="dot paper-color-btn" data-paper-bg="#e6f2fa" data-paper-name="Γαλάζιο" title="Γαλάζιο" style="background:#e6f2fa"></button>
+    <button type="button" class="dot paper-color-btn" data-paper-bg="#e7f5ec" data-paper-name="Πράσινο της Μέντας" title="Πράσινο της Μέντας" style="background:#e7f5ec"></button>
+    <button type="button" class="dot paper-color-btn" data-paper-bg="#e5e7eb" data-paper-name="Ανακυκλωμένο Γκρι" title="Ανακυκλωμένο Γκρι" style="background:#e5e7eb"></button>
+    <button type="button" class="dot paper-color-btn" data-paper-bg="#232220" data-paper-name="Σκούρο Χαρτί" title="Σκούρο Χαρτί" style="background:#232220"></button>
+    <label id="customPaperBtn" class="dot custom" title="Άλλο χρώμα χαρτιού"><i class="fa-solid fa-plus" style="pointer-events:none"></i><input type="color" id="customPaperColor" value="#fdfbf7" aria-label="Ελεύθερο χρώμα χαρτιού"></label>
+  </div>
+
+  <span class="sep"></span>
+
+  <div class="group">
+    <select id="paperSelect" class="tb-select" title="Τύπος χαρτιού">
+      <option value="paper-lined">Γραμμές</option>
+      <option value="paper-grid">Τετραγωνάκια</option>
+      <option value="paper-dotted">Τελείες</option>
+      <option value="paper-blank">Λευκό</option>
+    </select>
+    <button type="button" id="marginToggleBtn" class="icon-btn" title="Κόκκινο περιθώριο" style="color:#dc2626"><i class="fa-solid fa-grip-lines-vertical" style="font-size:10px"></i></button>
+  </div>
+
+  <span class="sep"></span>
+
+  <div id="alignmentGroup" class="group">
+    <button type="button" data-align="left" class="icon-btn align-btn" title="Αριστερά (Ctrl+L)"><i class="fa-solid fa-align-left"></i></button>
+    <button type="button" data-align="center" class="icon-btn align-btn" title="Κέντρο (Ctrl+E)"><i class="fa-solid fa-align-center"></i></button>
+    <button type="button" data-align="right" class="icon-btn align-btn" title="Δεξιά (Ctrl+R)"><i class="fa-solid fa-align-right"></i></button>
+    <button type="button" data-align="justify" class="icon-btn align-btn" title="Πλήρης (Ctrl+J)"><i class="fa-solid fa-align-justify"></i></button>
+  </div>
+
+  <button type="button" id="highlightBtn" class="icon-btn" title="Μαρκαδόρος (Ctrl+Shift+H)" style="color:#d97706"><i class="fa-solid fa-highlighter"></i></button>
+
+  <div class="group" title="Μέγεθος γραφής (με επιλεγμένο κείμενο αλλάζει μόνο την επιλογή)">
+    <button type="button" id="sizeDownBtn" class="icon-btn" title="Μικρότερα γράμματα (Ctrl+Shift+,)" style="font-size:10px;font-weight:600">A−</button>
+    <input type="range" id="fontSizeRange" min="18" max="42" value="25">
+    <button type="button" id="sizeUpBtn" class="icon-btn" title="Μεγαλύτερα γράμματα (Ctrl+Shift+.)" style="font-size:13px;font-weight:600">A+</button>
+  </div>
+
+  <span class="sep"></span>
+
+  <div class="group">
+    <button type="button" id="tbSyncBtn" class="icon-btn sync-btn" data-state="off" title="Συγχρονισμός"><i class="fa-solid fa-cloud"></i></button>
+    <button type="button" id="soundToggleBtn" class="icon-btn" title="Ήχος στυλό"><i id="soundIcon" class="fa-solid fa-volume-xmark"></i></button>
+    <button type="button" id="duplicateBtn" class="icon-btn" title="Διπλασιασμός σημείωσης"><i class="fa-regular fa-copy"></i></button>
+    <button type="button" id="printBtn" class="icon-btn" title="Εκτύπωση / PDF (Ctrl+P)"><i class="fa-solid fa-print"></i></button>
+    <button type="button" id="downloadBtn" class="icon-btn" title="Αποθήκευση ως εικόνα PNG (Ctrl+S)"><i class="fa-solid fa-image"></i></button>
+    <button type="button" id="deleteNoteBtn" class="icon-btn danger" title="Αρχειοθέτηση (μπορείς να την αναιρέσεις)"><i id="deleteIcon" class="fa-solid fa-box-archive"></i></button>
+    <span class="sep"></span>
+    <button type="button" id="hideToolbarBtn" class="icon-btn" title="Απόκρυψη μενού (Ctrl+Shift+M)"><i class="fa-solid fa-chevron-up" style="font-size:10px"></i></button>
+  </div>
+</header>
+
+<!-- FULLSCREEN -->
+<section id="fullscreenView" class="hidden">
+  <div id="fullscreenPaperSheet" class="paper-sheet">
+    <div class="paper-texture"></div>
+    <div class="fs-head">
+      <input type="text" id="titleInput" class="title-input font-caveat" placeholder="Τίτλος…" maxlength="120" autocomplete="off">
+      <div class="tag-row">
+        <span id="tagChips" style="display:contents"></span>
+        <input type="text" id="tagInput" class="no-print" placeholder="+ ετικέτα" list="allTagsList" maxlength="30" autocomplete="off">
+        <datalist id="allTagsList"></datalist>
+      </div>
+    </div>
+    <div class="ruled paper-lined notebook-margin">
+      <div id="fullscreenEditor" class="note-editor font-caveat" contenteditable="true" spellcheck="true" role="textbox" aria-multiline="true" aria-label="Χειρόγραφο κείμενο"></div>
+    </div>
+    <div class="fs-foot no-print" id="fsFoot"></div>
+  </div>
+</section>
+
+<!-- CLIPBOARD -->
+<main id="clipboardViewport" class="hidden">
+  <div id="deskStage"><div id="deskCanvas"></div></div>
+  <div id="zoomControls" class="no-print">
+    <button type="button" id="zoomOutBtn" class="icon-btn" title="Σμίκρυνση"><i class="fa-solid fa-minus" style="font-size:10px"></i></button>
+    <span id="zoomLevelLabel" class="zl">85%</span>
+    <button type="button" id="zoomInBtn" class="icon-btn" title="Μεγέθυνση"><i class="fa-solid fa-plus" style="font-size:10px"></i></button>
+    <span class="sep" style="margin:0 2px"></span>
+    <button type="button" id="fitAllNotesBtn" class="zb" title="Όλες οι σημειώσεις στην οθόνη"><i class="fa-solid fa-expand" style="font-size:10px"></i><span class="zt">Χωρέστε όλα</span></button>
+    <button type="button" id="autoArrangeBtn" class="zb" title="Τακτοποίηση χωρίς επικάλυψη"><i class="fa-solid fa-border-all" style="font-size:10px"></i><span class="zt">Τακτοποίηση</span></button>
+  </div>
+</main>
+
+<!-- NOTE PICKER MODAL -->
+<div id="notePickerModal" class="modal-backdrop hidden">
+  <div class="modal">
+    <div class="mh">
+      <div class="name"><i class="fa-solid fa-clipboard-list"></i><input type="text" id="modalBoardNameInput" placeholder="Όνομα Clipboard (π.χ. Μπιτ για σχέσεις)..."></div>
+      <div class="hrow">
+        <span id="pickerSelectedCount" style="font-size:12px;font-weight:500;color:var(--s500)"></span>
+        <button type="button" id="closeNotePickerBtn" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="ms">
+      <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="pickerSearchInput" placeholder="Αναζήτηση μέσα στις σημειώσεις σας..."></div>
+      <button type="button" id="pickerSelectAllBtn" class="btn btn-soft" style="padding:4px 12px">Επιλογή όλων</button>
+    </div>
+    <div id="pickerNotesGrid"></div>
+    <div class="mf">
+      <button type="button" id="cancelNotePickerBtn" class="btn btn-soft">Ακύρωση</button>
+      <button type="button" id="confirmNotePickerBtn" class="btn btn-dark"><i class="fa-solid fa-check" style="font-size:10px"></i><span>Άνοιγμα στο Clipboard</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORT MODAL -->
+<div id="importModal" class="modal-backdrop hidden">
+  <div class="modal small">
+    <h3>Εισαγωγή αντιγράφου ασφαλείας</h3>
+    <p id="importSummary"></p>
+    <p style="font-size:12px"><b>Συγχώνευση:</b> προστίθενται οι νέες σημειώσεις και ενημερώνονται οι ίδιες αν το αρχείο έχει νεότερη εκδοχή. Δεν χάνεται τίποτα.<br><b>Αντικατάσταση:</b> σβήνει ό,τι υπάρχει τώρα και βάζει μόνο το περιεχόμενο του αρχείου.</p>
+    <div class="modal-actions">
+      <button type="button" id="importCancelBtn" class="btn btn-soft">Ακύρωση</button>
+      <button type="button" id="importMergeBtn" class="btn btn-dark">Συγχώνευση</button>
+      <button type="button" id="importReplaceBtn" class="btn btn-danger">Αντικατάσταση όλων</button>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH / SYNC MODAL -->
+<div id="authModal" class="modal-backdrop hidden">
+  <div class="modal small">
+    <h3><i class="fa-solid fa-cloud" style="color:var(--amber);margin-right:6px"></i>Συγχρονισμός</h3>
+    <div id="authNotConfigured" class="hidden">
+      <p>Ο συγχρονισμός δεν έχει ρυθμιστεί ακόμα. Συμπλήρωσε τα <b>SUPABASE_URL</b> και <b>SUPABASE_ANON_KEY</b> στην αρχή του κώδικα (μέσα στο &lt;script&gt;). Μέχρι τότε οι σημειώσεις μένουν μόνο σε αυτόν τον browser.</p>
+      <div class="modal-actions"><button type="button" class="btn btn-soft auth-close">Κλείσιμο</button></div>
+    </div>
+    <div id="authSignedOut" class="hidden">
+      <p>Σύνδεσου για να βλέπεις τις ίδιες σημειώσεις σε όλες τις συσκευές. Ό,τι υπάρχει ήδη εδώ θα ανέβει στον λογαριασμό σου.</p>
+      <input type="email" id="authEmail" class="field" placeholder="Email" autocomplete="email">
+      <input type="password" id="authPassword" class="field" placeholder="Κωδικός (τουλάχιστον 6 χαρακτήρες)" autocomplete="current-password">
+      <div id="authMsg" class="auth-msg"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-soft auth-close">Ακύρωση</button>
+        <button type="button" id="authSignUpBtn" class="btn btn-soft">Νέος λογαριασμός</button>
+        <button type="button" id="authSignInBtn" class="btn btn-dark">Σύνδεση</button>
+      </div>
+    </div>
+    <div id="authSignedIn" class="hidden">
+      <p>Συνδεδεμένος ως <b id="authUserEmail"></b>.<br><span id="authSyncInfo"></span></p>
+      <div class="modal-actions">
+        <button type="button" id="authSignOutBtn" class="btn btn-soft">Αποσύνδεση</button>
+        <button type="button" class="btn btn-soft auth-close">Κλείσιμο</button>
+        <button type="button" id="authSyncNowBtn" class="btn btn-dark"><i class="fa-solid fa-rotate" style="font-size:10px"></i>Συγχρονισμός τώρα</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"><span id="toastMsg"></span><button type="button" id="toastAction" class="hidden"></button></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================================================================== *
+   * ΡΥΘΜΙΣΗ ΣΥΓΧΡΟΝΙΣΜΟΥ: βάλε εδώ τα στοιχεία από το Supabase
+   * (Project Settings → API). Αν μείνουν κενά, η εφαρμογή δουλεύει
+   * μόνο τοπικά, όπως πριν.
+   * ================================================================== */
+  const SUPABASE_URL = 'https://fqyxicvjfmhzhbjaudkq.supabase.co';      // π.χ. 'https://abcdefgh.supabase.co'
+  const SUPABASE_ANON_KEY = 'sb_publishable_0Kie8_m7iEb9njlKQZsZRg_TsfXneS_'; // το κλειδί "anon public" (ή "publishable")
+
+  /* ------------------------------------------------------------------ *
+   * Σταθερές & βοηθητικά
+   * ------------------------------------------------------------------ */
+  const STORAGE_KEY = 'greek_standup_desk_notes_v1';          // ίδιο με πριν: οι παλιές σημειώσεις φορτώνουν κανονικά
+  const BOARDS_STORAGE_KEY = 'greek_standup_named_boards_v1'; // ίδιο με πριν
+  const PREFS_KEY = 'greek_standup_prefs_v2';
+  const BACKUP_KEY = 'greek_standup_last_backup_v1';
+  const WORLD_ORIGIN = 4000;
+  const WORDS_PER_MIN = 140; // ρυθμός σκηνικής απαγγελίας (άλλαξέ τον αν μιλάς πιο γρήγορα/αργά)
+  const BACKUP_REMIND_DAYS = 7;
+
+  const FONT_FAMILIES = {
+    'font-caveat': 'Caveat', 'font-badscript': 'Bad Script', 'font-marck': 'Marck Script',
+    'font-pangolin': 'Pangolin', 'font-playpen': 'Playpen Sans', 'font-patrick': 'Patrick Hand', 'font-comfortaa': 'Comfortaa'
+  };
+  const FONT_CLASSES = Object.keys(FONT_FAMILIES);
+  const PAPER_CLASSES = ['paper-lined', 'paper-grid', 'paper-dotted', 'paper-blank'];
+  const NEW_NOTE_SHADES = ['#fdfbf7', '#fef6c9', '#e6f2fa', '#e7f5ec', '#fce8eb', '#f4ebd9'];
+
+  const $ = (id) => document.getElementById(id);
+
+  function lsGet(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+  function lsSet(key, val) { try { localStorage.setItem(key, val); return true; } catch (e) { return false; } }
+
+  function norm(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ');
+  }
+  function esc(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function plainText(html) {
+    if (!html) return '';
+    const withBreaks = String(html).replace(/<\s*br\s*\/?>|<\/(div|p|li|h[1-6])>/gi, '\n');
+    const doc = new DOMParser().parseFromString(withBreaks, 'text/html');
+    return (doc.body.textContent || '').replace(/\u00a0/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
+  }
+  function countWords(text) {
+    const t = (text || '').trim();
+    return t ? t.split(/\s+/).length : 0;
+  }
+  function fmtTime(words) {
+    const sec = Math.round((words / WORDS_PER_MIN) * 60);
+    const m = Math.floor(sec / 60), s = sec % 60;
+    return m + ':' + String(s).padStart(2, '0');
+  }
+  function fmtDate(ts) {
+    try { return new Date(ts).toLocaleDateString('el-GR', { day: 'numeric', month: 'short', year: 'numeric' }); }
+    catch (e) { return ''; }
+  }
+  function fmtDateTime(ts) {
+    try { return new Date(ts).toLocaleString('el-GR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }); }
+    catch (e) { return ''; }
+  }
+  function isColorDark(hex) {
+    if (!hex || hex.charAt(0) !== '#') return false;
+    const clean = hex.replace('#', '');
+    const full = clean.length === 3 ? clean.split('').map((c) => c + c).join('') : clean;
+    const r = parseInt(full.substring(0, 2), 16), g = parseInt(full.substring(2, 4), 16), b = parseInt(full.substring(4, 6), 16);
+    return (0.299 * r + 0.587 * g + 0.114 * b) / 255 < 0.45;
+  }
+  // Καθαρισμός HTML (για εισαγωγή αρχείων): αφαιρεί scripts, iframes, on* handlers, javascript: links
+  function sanitizeHtml(html) {
+    if (!html) return '';
+    const doc = new DOMParser().parseFromString('<body>' + html + '</body>', 'text/html');
+    doc.querySelectorAll('script,style,iframe,object,embed,link,meta,form,base').forEach((el) => el.remove());
+    doc.querySelectorAll('*').forEach((el) => {
+      Array.from(el.attributes).forEach((a) => {
+        const n = a.name.toLowerCase(), v = (a.value || '').trim().toLowerCase();
+        if (n.startsWith('on') || ((n === 'href' || n === 'src' || n === 'xlink:href') && v.startsWith('javascript:'))) el.removeAttribute(a.name);
+      });
+    });
+    return doc.body.innerHTML;
+  }
+
+  /* ------------------------------------------------------------------ *
+   * DOM refs
+   * ------------------------------------------------------------------ */
+  const homeView = $('homeView'), notesListGrid = $('notesListGrid'), totalNotesCount = $('totalNotesCount');
+  const savedBoardsSection = $('savedBoardsSection'), savedBoardsGrid = $('savedBoardsGrid');
+  const searchInput = $('searchInput'), sortSelect = $('sortSelect');
+  const tabActive = $('tabActive'), tabArchive = $('tabArchive'), tagFilterBar = $('tagFilterBar'), emptyState = $('emptyState');
+  const backupBanner = $('backupBanner'), backupBannerText = $('backupBannerText');
+  const modeListBtn = $('modeListBtn'), modeClipboardBtn = $('modeClipboardBtn');
+  const homeNewNoteBtn = $('homeNewNoteBtn'), homeNewBoardBtn = $('homeNewBoardBtn');
+  const exportBtn = $('exportBtn'), importBtn = $('importBtn'), importFile = $('importFile');
+
+  const minimalToolbar = $('minimalToolbar'), showToolbarPill = $('showToolbarPill'), hideToolbarBtn = $('hideToolbarBtn');
+  const backToListBtn = $('backToListBtn'), boardNameWrap = $('boardNameWrap'), boardTitleInput = $('boardTitleInput');
+  const pickNotesForBoardBtn = $('pickNotesForBoardBtn'), addNoteBtn = $('addNoteBtn'), fullscreenToClipboardBtn = $('fullscreenToClipboardBtn');
+  const fontSelect = $('fontSelect'), paperSelect = $('paperSelect'), marginToggleBtn = $('marginToggleBtn');
+  const fontSizeRange = $('fontSizeRange'), sizeUpBtn = $('sizeUpBtn'), sizeDownBtn = $('sizeDownBtn');
+  const highlightBtn = $('highlightBtn'), deleteNoteBtn = $('deleteNoteBtn'), deleteIcon = $('deleteIcon'), duplicateBtn = $('duplicateBtn');
+  const downloadBtn = $('downloadBtn'), printBtn = $('printBtn'), soundToggleBtn = $('soundToggleBtn'), soundIcon = $('soundIcon');
+  const paperColorPalette = $('paperColorPalette'), customPaperBtn = $('customPaperBtn'), customPaperColorInput = $('customPaperColor');
+  const inkPalette = $('inkPalette'), alignmentGroup = $('alignmentGroup');
+
+  const fullscreenView = $('fullscreenView'), fullscreenPaperSheet = $('fullscreenPaperSheet'), fullscreenEditor = $('fullscreenEditor');
+  const titleInput = $('titleInput'), tagChips = $('tagChips'), tagInput = $('tagInput'), allTagsList = $('allTagsList'), fsFoot = $('fsFoot');
+
+  const clipboardViewport = $('clipboardViewport'), deskStage = $('deskStage'), deskCanvas = $('deskCanvas');
+  const zoomOutBtn = $('zoomOutBtn'), zoomInBtn = $('zoomInBtn'), zoomLevelLabel = $('zoomLevelLabel');
+  const fitAllNotesBtn = $('fitAllNotesBtn'), autoArrangeBtn = $('autoArrangeBtn');
+
+  const notePickerModal = $('notePickerModal'), modalBoardNameInput = $('modalBoardNameInput'), pickerSelectedCount = $('pickerSelectedCount');
+  const pickerSearchInput = $('pickerSearchInput'), pickerSelectAllBtn = $('pickerSelectAllBtn'), pickerNotesGrid = $('pickerNotesGrid');
+  const closeNotePickerBtn = $('closeNotePickerBtn'), cancelNotePickerBtn = $('cancelNotePickerBtn'), confirmNotePickerBtn = $('confirmNotePickerBtn');
+  const importModal = $('importModal'), importSummary = $('importSummary');
+  const importCancelBtn = $('importCancelBtn'), importMergeBtn = $('importMergeBtn'), importReplaceBtn = $('importReplaceBtn');
+  const toast = $('toast'), toastMsg = $('toastMsg'), toastAction = $('toastAction');
+
+  /* ------------------------------------------------------------------ *
+   * State
+   * ------------------------------------------------------------------ */
+  let currentView = 'list';
+  let notes = [];
+  let namedBoards = [];
+  let activeBoardId = null;
+  let activeNoteId = null;
+  let topZIndex = 10;
+  let previousAlign = 'left';
+  let penSoundEnabled = false;
+  let toolbarHidden = false;
+  let audioCtx = null;
+  let toastTimer = null, typingIdleTimer = null, saveTimeout = null;
+  let storageWarned = false;
+
+  let homeFilter = 'active';  // 'active' | 'archived'
+  let homeSearch = '';
+  let homeTag = null;
+  let bannerDismissed = false;
+  let prefs = { sort: 'updated' };
+
+  let viewScale = 0.85, viewPanX = -WORLD_ORIGIN * 0.85, viewPanY = -WORLD_ORIGIN * 0.85;
+  let isSpacePressed = false;
+
+  let pickerTargetBoardId = null;
+  let pickerSelectedIds = new Set();
+  let newNoteColorIdx = 0;
+  let savedRange = null;
+  let pendingImport = null;
+
+  /* ------------------------------------------------------------------ *
+   * Μοντέλο σημείωσης
+   * ------------------------------------------------------------------ */
+  function newId() { return 'note_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6); }
+
+  function normalizeNote(n, idx) {
+    const m = /note_(\d{10,})/.exec(n.id || '');
+    const t = m ? Number(m[1]) : Date.now();
+    if (!n.id) n.id = newId();
+    n.title = typeof n.title === 'string' ? n.title : '';
+    n.tags = Array.isArray(n.tags) ? n.tags.map((x) => String(x)).filter(Boolean) : [];
+    n.createdAt = Number(n.createdAt) || t;
+    n.updatedAt = Number(n.updatedAt) || n.createdAt;
+    n.archived = !!n.archived;
+    n.html = typeof n.html === 'string' ? n.html : '';
+    n.font = FONT_CLASSES.includes(n.font) ? n.font : 'font-caveat';
+    n.inkColor = n.inkColor || '#1d4ed8';
+    n.paperBg = n.paperBg || '#fdfbf7';
+    n.paperStyle = PAPER_CLASSES.includes(n.paperStyle) ? n.paperStyle : 'paper-lined';
+    n.margin = n.margin !== false;
+    n.fontSize = Number(n.fontSize) || 25;
+    n.align = n.align || 'left';
+    n.x = typeof n.x === 'number' ? n.x : WORLD_ORIGIN + 80 + ((idx || 0) % 4) * 345;
+    n.y = typeof n.y === 'number' ? n.y : WORLD_ORIGIN + 95 + Math.floor((idx || 0) / 4) * 300;
+    n.width = Number(n.width) || 310;
+    n.height = Number(n.height) || 260;
+    n.zIndex = Number(n.zIndex) || 1;
+    return n;
+  }
+  function touch(note) { if (note) note.updatedAt = Date.now(); }
+
+  /* ------------------------------------------------------------------ *
+   * Αποθήκευση
+   * ------------------------------------------------------------------ */
+  function getActiveBoard() { return activeBoardId ? (namedBoards.find((b) => b.id === activeBoardId) || null) : null; }
+  function getActiveNote() { return notes.find((n) => n.id === activeNoteId) || null; }
+  function spatialFor(note) {
+    const board = getActiveBoard();
+    return board ? ((board.items || []).find((it) => it.noteId === note.id) || note) : note;
+  }
+  function getActiveSheetEl() {
+    if (currentView === 'fullscreen') return fullscreenPaperSheet;
+    if (!activeNoteId) return null;
+    return deskCanvas.querySelector('.paper-sheet[data-id="' + activeNoteId + '"]');
+  }
+  function getActiveEditorEl() {
+    if (currentView === 'fullscreen') return fullscreenEditor;
+    const s = getActiveSheetEl();
+    return s ? s.querySelector('.note-editor') : null;
+  }
+
+  function flushActiveEditorsToState() {
+    if (currentView === 'fullscreen') {
+      const note = getActiveNote();
+      if (note) note.html = fullscreenEditor.innerHTML;
+    } else if (currentView === 'clipboard') {
+      const board = getActiveBoard();
+      deskCanvas.querySelectorAll('.paper-sheet').forEach((sheetEl) => {
+        const id = sheetEl.dataset.id;
+        const note = notes.find((n) => n.id === id);
+        const editorEl = sheetEl.querySelector('.note-editor');
+        if (note && editorEl) note.html = editorEl.innerHTML;
+        const layoutObj = board ? (board.items || []).find((it) => it.noteId === id) : note;
+        if (layoutObj) {
+          const x = parseFloat(sheetEl.style.left), y = parseFloat(sheetEl.style.top);
+          const w = parseFloat(sheetEl.style.width), h = parseFloat(sheetEl.style.minHeight);
+          if (!Number.isNaN(x)) layoutObj.x = x;
+          if (!Number.isNaN(y)) layoutObj.y = y;
+          if (!Number.isNaN(w)) layoutObj.width = w;
+          if (!Number.isNaN(h)) layoutObj.height = h;
+        }
+      });
+      if (board) board.camera = { x: viewPanX, y: viewPanY, scale: viewScale };
+    }
+  }
+
+  function persistNow() {
+    const ok1 = lsSet(STORAGE_KEY, JSON.stringify(notes));
+    const ok2 = lsSet(BOARDS_STORAGE_KEY, JSON.stringify(namedBoards));
+    if ((!ok1 || !ok2) && !storageWarned) {
+      storageWarned = true;
+      showToast('⚠ Δεν μπόρεσε να αποθηκευτεί (γεμάτος ή μπλοκαρισμένος χώρος). Κατέβασε αντίγραφο!', null, 6000);
+    }
+    schedulePush();
+  }
+  function saveAllNotes(immediate) {
+    flushActiveEditorsToState();
+    clearTimeout(saveTimeout);
+    if (immediate) persistNow(); else saveTimeout = setTimeout(persistNow, 250);
+  }
+  function savePrefs() { lsSet(PREFS_KEY, JSON.stringify(prefs)); }
+
+  /* ------------------------------------------------------------------ *
+   * Toast
+   * ------------------------------------------------------------------ */
+  function showToast(message, action, duration) {
+    toastMsg.textContent = message;
+    if (action) {
+      toastAction.textContent = action.label;
+      toastAction.classList.remove('hidden');
+      toastAction.onclick = () => { hideToast(); action.fn(); };
+      toast.classList.add('has-action');
+    } else {
+      toastAction.classList.add('hidden');
+      toastAction.onclick = null;
+      toast.classList.remove('has-action');
+    }
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, duration || (action ? 6000 : 1700));
+  }
+  function hideToast() { toast.classList.remove('show', 'has-action'); }
+
+  function playPenScratch() {
+    if (!penSoundEnabled) return;
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const size = Math.floor(audioCtx.sampleRate * 0.025);
+      const buffer = audioCtx.createBuffer(1, size, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < size; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (size * 0.4));
+      const noise = audioCtx.createBufferSource(); noise.buffer = buffer;
+      const filter = audioCtx.createBiquadFilter(); filter.type = 'bandpass';
+      filter.frequency.value = 1800 + Math.random() * 600; filter.Q.value = 1.8;
+      const gain = audioCtx.createGain(); gain.gain.value = 0.035;
+      noise.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination); noise.start();
+    } catch (e) { /* ignore */ }
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Toolbar visibility
+   * ------------------------------------------------------------------ */
+  function updateToolbarVisibility() {
+    if (currentView === 'list') { minimalToolbar.classList.add('hidden'); showToolbarPill.classList.add('hidden'); return; }
+    if (toolbarHidden) { minimalToolbar.classList.add('hidden'); showToolbarPill.classList.remove('hidden'); }
+    else { minimalToolbar.classList.remove('hidden'); showToolbarPill.classList.add('hidden'); }
+  }
+  function toggleToolbarHidden(force) {
+    toolbarHidden = force !== undefined && force !== null ? !!force : !toolbarHidden;
+    updateToolbarVisibility();
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Pan / Zoom
+   * ------------------------------------------------------------------ */
+  function applyStageTransform() {
+    deskStage.style.transform = 'translate(' + Math.round(viewPanX) + 'px, ' + Math.round(viewPanY) + 'px) scale(' + viewScale + ')';
+    zoomLevelLabel.textContent = Math.round(viewScale * 100) + '%';
+    const board = getActiveBoard();
+    if (board) board.camera = { x: viewPanX, y: viewPanY, scale: viewScale };
+  }
+  function zoomAtPoint(newScale, cx, cy) {
+    const clamped = Math.max(0.22, Math.min(2.0, newScale));
+    const wx = (cx - viewPanX) / viewScale, wy = (cy - viewPanY) / viewScale;
+    viewScale = clamped; viewPanX = cx - wx * viewScale; viewPanY = cy - wy * viewScale;
+    applyStageTransform(); saveAllNotes(false);
+  }
+  function fitVisibleNotesInView(list) {
+    if (!list || list.length === 0) {
+      viewScale = 0.85; viewPanX = -WORLD_ORIGIN * viewScale; viewPanY = -WORLD_ORIGIN * viewScale;
+      applyStageTransform(); return;
+    }
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    list.forEach((it) => {
+      minX = Math.min(minX, it.x); minY = Math.min(minY, it.y);
+      maxX = Math.max(maxX, it.x + (it.width || 310)); maxY = Math.max(maxY, it.y + (it.height || 260));
+    });
+    const contentW = Math.max(320, maxX - minX + 120), contentH = Math.max(260, maxY - minY + 140);
+    const availW = window.innerWidth - 60, availH = window.innerHeight - 130;
+    const ideal = Math.min(1.0, Math.max(0.22, Math.min(availW / contentW, availH / contentH)));
+    viewScale = Number(ideal.toFixed(2));
+    viewPanX = (window.innerWidth - (maxX - minX) * viewScale) / 2 - minX * viewScale;
+    viewPanY = Math.max(72, (window.innerHeight - (maxY - minY) * viewScale) / 2 + 18) - minY * viewScale;
+    applyStageTransform();
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Εναλλαγή προβολών
+   * ------------------------------------------------------------------ */
+  function switchView(viewMode, noteIdToOpen, boardIdToOpen) {
+    saveAllNotes(true);
+    currentView = viewMode;
+    document.body.classList.remove('is-writing');
+
+    if (viewMode === 'list') {
+      activeBoardId = null;
+      homeView.classList.remove('hidden');
+      fullscreenView.classList.add('hidden');
+      clipboardViewport.classList.add('hidden');
+      updateToolbarVisibility();
+      window.scrollTo(0, 0);
+      renderHomeScreen();
+      return;
+    }
+
+    if (viewMode === 'fullscreen') {
+      homeView.classList.add('hidden');
+      clipboardViewport.classList.add('hidden');
+      fullscreenView.classList.remove('hidden');
+      updateToolbarVisibility();
+      boardNameWrap.classList.add('hidden');
+      pickNotesForBoardBtn.classList.add('hidden');
+      addNoteBtn.classList.add('hidden');
+      fullscreenToClipboardBtn.classList.remove('hidden');
+
+      const target = noteIdToOpen || activeNoteId;
+      const note = (target && notes.find((n) => n.id === target)) || notes.find((n) => !n.archived) || notes[0];
+      if (!note) { switchView('list'); return; }
+      setActiveNote(note.id, false);
+      fullscreenEditor.innerHTML = note.html || '';
+      titleInput.value = note.title || '';
+      renderTagChips(note);
+      renderNoteStyles(note, fullscreenPaperSheet, true);
+      updateFsFoot();
+      window.scrollTo(0, 0);
+      setTimeout(() => {
+        if (!note.title && !plainText(note.html)) titleInput.focus(); else fullscreenEditor.focus();
+      }, 30);
+      return;
+    }
+
+    if (viewMode === 'clipboard') {
+      activeBoardId = boardIdToOpen || null;
+      homeView.classList.add('hidden');
+      fullscreenView.classList.add('hidden');
+      clipboardViewport.classList.remove('hidden');
+      updateToolbarVisibility();
+      addNoteBtn.classList.remove('hidden');
+      fullscreenToClipboardBtn.classList.add('hidden');
+
+      const board = getActiveBoard();
+      if (board) {
+        boardNameWrap.classList.remove('hidden');
+        boardTitleInput.value = board.name || '';
+        pickNotesForBoardBtn.classList.remove('hidden');
+      } else {
+        boardNameWrap.classList.add('hidden');
+        pickNotesForBoardBtn.classList.add('hidden');
+      }
+
+      renderAllClipboardNotes();
+      if (board && board.camera) {
+        viewPanX = board.camera.x; viewPanY = board.camera.y; viewScale = board.camera.scale;
+        applyStageTransform();
+      } else {
+        fitVisibleNotesInView(getVisibleBoardNotes());
+      }
+      const visible = getVisibleBoardNotes();
+      const wanted = noteIdToOpen && visible.find((v) => v.id === noteIdToOpen) ? noteIdToOpen : (visible[0] && visible[0].id);
+      if (wanted) setActiveNote(wanted, false); else activeNoteId = null;
+    }
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Αρχική οθόνη
+   * ------------------------------------------------------------------ */
+  function renderHomeScreen() {
+    renderBackupBanner();
+    renderSavedBoardsSection();
+    renderSequentialListView();
+  }
+
+  function renderBackupBanner() {
+    const hasContent = notes.some((n) => (n.title || '').trim() || plainText(n.html));
+    const last = Number(lsGet(BACKUP_KEY)) || 0;
+    const days = last ? Math.floor((Date.now() - last) / 86400000) : null;
+    if (bannerDismissed || !hasContent || syncUser || (last && days < BACKUP_REMIND_DAYS)) { backupBanner.classList.add('hidden'); return; }
+    backupBannerText.textContent = (last
+      ? 'Έχεις να κατεβάσεις αντίγραφο ασφαλείας ' + days + ' μέρες.'
+      : 'Δεν έχεις κατεβάσει ακόμα αντίγραφο ασφαλείας.')
+      + ' Οι σημειώσεις ζουν μόνο σε αυτόν τον browser· αν καθαριστούν τα δεδομένα του, χάνονται.';
+    backupBanner.classList.remove('hidden');
+  }
+
+  function renderSavedBoardsSection() {
+    if (namedBoards.length === 0) { savedBoardsSection.classList.add('hidden'); return; }
+    savedBoardsSection.classList.remove('hidden');
+    savedBoardsGrid.innerHTML = '';
+    namedBoards.forEach((board) => {
+      const card = document.createElement('div');
+      card.className = 'board-card';
+      card.tabIndex = 0;
+      const count = (board.items || []).filter((it) => { const n = notes.find((x) => x.id === it.noteId); return n && !n.archived; }).length;
+      card.innerHTML =
+        '<div class="bt"><span class="bi"><i class="fa-solid fa-clipboard-list"></i></span><h3>' + esc(board.name || 'Χωρίς όνομα') + '</h3></div>' +
+        '<button type="button" class="icon-btn danger del" title="Διαγραφή Clipboard (οι σημειώσεις μένουν)"><i class="fa-solid fa-trash-can" style="font-size:10px"></i></button>' +
+        '<div class="bm"><span>' + count + ' ' + (count === 1 ? 'σημείωση' : 'σημειώσεις') + '</span><b>Άνοιγμα →</b></div>';
+      const delBtn = card.querySelector('.del');
+      let pending = false, timer = null;
+      delBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!pending) {
+          pending = true; delBtn.style.opacity = 1; delBtn.style.background = '#fee2e2'; delBtn.style.color = '#b91c1c';
+          showToast('Πάτα ξανά για διαγραφή του Clipboard (οι σημειώσεις δεν σβήνονται)');
+          timer = setTimeout(() => { pending = false; delBtn.removeAttribute('style'); }, 3000);
+        } else {
+          clearTimeout(timer);
+          namedBoards = namedBoards.filter((b) => b.id !== board.id);
+          saveAllNotes(true); renderSavedBoardsSection(); showToast('Το Clipboard διαγράφηκε');
+        }
+      });
+      card.addEventListener('click', () => switchView('clipboard', null, board.id));
+      savedBoardsGrid.appendChild(card);
+    });
+  }
+
+  function getFilteredNotes() {
+    const wantArchived = homeFilter === 'archived';
+    const q = norm(homeSearch).trim();
+    let list = notes.filter((n) => !!n.archived === wantArchived);
+    if (homeTag) list = list.filter((n) => n.tags.some((t) => norm(t) === norm(homeTag)));
+    if (q) {
+      list = list.filter((n) => norm((n.title || '') + ' ' + n.tags.join(' ') + ' ' + plainText(n.html)).includes(q));
+    }
+    const s = prefs.sort;
+    list.sort((a, b) => {
+      if (s === 'created-desc') return b.createdAt - a.createdAt;
+      if (s === 'created-asc') return a.createdAt - b.createdAt;
+      if (s === 'title') {
+        const ta = (a.title || '').trim(), tb = (b.title || '').trim();
+        if (!ta && tb) return 1;
+        if (ta && !tb) return -1;
+        return ta.localeCompare(tb, 'el', { sensitivity: 'base' });
+      }
+      return b.updatedAt - a.updatedAt;
+    });
+    return list;
+  }
+
+  function renderTagFilterBar() {
+    const pool = notes.filter((n) => !!n.archived === (homeFilter === 'archived'));
+    const counts = new Map();
+    pool.forEach((n) => n.tags.forEach((t) => { const k = t.trim(); if (k) counts.set(k, (counts.get(k) || 0) + 1); }));
+    tagFilterBar.innerHTML = '';
+    if (homeTag && !counts.has(homeTag)) homeTag = null;
+    if (counts.size === 0) return;
+    const sorted = Array.from(counts.entries()).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'el'));
+    sorted.forEach(([tag, c]) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip' + (homeTag === tag ? ' on' : '');
+      b.textContent = '#' + tag + ' · ' + c;
+      b.addEventListener('click', () => { homeTag = homeTag === tag ? null : tag; renderSequentialListView(); });
+      tagFilterBar.appendChild(b);
+    });
+  }
+
+  function renderSequentialListView() {
+    const archivedCount = notes.filter((n) => n.archived).length;
+    const activeCount = notes.length - archivedCount;
+    tabActive.classList.toggle('on', homeFilter === 'active');
+    tabArchive.classList.toggle('on', homeFilter === 'archived');
+    tabActive.textContent = 'Σημειώσεις (' + activeCount + ')';
+    tabArchive.textContent = 'Αρχείο (' + archivedCount + ')';
+    sortSelect.value = prefs.sort;
+
+    renderTagFilterBar();
+    const list = getFilteredNotes();
+    const total = homeFilter === 'archived' ? archivedCount : activeCount;
+    totalNotesCount.textContent = (homeSearch || homeTag) ? (list.length + ' από ' + total) : '';
+
+    notesListGrid.innerHTML = '';
+    emptyState.classList.toggle('hidden', list.length > 0);
+    if (list.length === 0) {
+      if (homeSearch || homeTag) emptyState.textContent = 'Καμία σημείωση δεν ταιριάζει με την αναζήτηση.';
+      else if (homeFilter === 'archived') emptyState.textContent = 'Το αρχείο είναι άδειο. Εδώ καταλήγουν οι σημειώσεις που αρχειοθετείς.';
+      else emptyState.textContent = 'Δεν έχεις σημειώσεις ακόμα. Πάτα «Νέα σημείωση» για να ξεκινήσεις.';
+    }
+
+    list.forEach((note) => {
+      const dark = isColorDark(note.paperBg);
+      const card = document.createElement('div');
+      card.className = 'doc-card';
+      card.tabIndex = 0;
+      card.style.backgroundColor = note.paperBg;
+      if (note.paperStyle === 'paper-lined') {
+        card.style.backgroundImage = 'linear-gradient(to bottom, transparent calc(100% - 1px), ' + (dark ? 'rgba(255,255,255,.14)' : 'rgba(30,58,138,.13)') + ' 1px)';
+        card.style.backgroundSize = '100% 24px';
+        card.style.backgroundPosition = '0 44px';
+      }
+      const text = plainText(note.html);
+      const words = countWords(text);
+      const metaColor = dark ? '#d6d3d1' : '#57534e';
+      const tagsHtml = note.tags.slice(0, 6).map((t) => '<span style="' + (dark ? 'background:rgba(255,255,255,.14);color:#e7e5e4' : '') + '">#' + esc(t) + '</span>').join('');
+      card.innerHTML =
+        '<div class="paper-texture"></div>' +
+        '<div class="card-body">' +
+          '<div class="card-title ' + note.font + '" style="color:' + esc(note.inkColor) + '">' + (note.title ? esc(note.title) : '<span class="untitled">Χωρίς τίτλο</span>') + '</div>' +
+          '<div class="card-tags">' + tagsHtml + '</div>' +
+          '<div class="card-preview ' + note.font + '" style="color:' + esc(note.inkColor) + ';text-align:' + esc(note.align) + '">' +
+            (text ? esc(text.slice(0, 700)) : '<span class="ghost">Κενό χαρτί...</span>') + '</div>' +
+        '</div>' +
+        '<div class="card-fade" style="background:linear-gradient(to top,' + esc(note.paperBg) + ',transparent)"></div>' +
+        '<div class="card-meta" style="color:' + metaColor + '"><span>' + fmtDate(note.updatedAt) + '</span><span>' + words + ' λέξεις' + (words ? ' · ~' + fmtTime(words) : '') + '</span></div>';
+
+      if (homeFilter === 'archived') {
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+        actions.innerHTML = '<button type="button" class="restore"><i class="fa-solid fa-box-open"></i>Επαναφορά</button><button type="button" class="danger forever"><i class="fa-solid fa-trash-can"></i></button>';
+        const restoreBtn = actions.querySelector('.restore'), foreverBtn = actions.querySelector('.forever');
+        restoreBtn.addEventListener('click', (e) => {
+          e.stopPropagation(); note.archived = false; saveAllNotes(true); renderHomeScreen(); showToast('Η σημείωση επανήλθε');
+        });
+        let pending = false, timer = null;
+        foreverBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!pending) {
+            pending = true; foreverBtn.classList.add('confirm'); foreverBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>Οριστικά;';
+            timer = setTimeout(() => { pending = false; foreverBtn.classList.remove('confirm'); foreverBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'; }, 3000);
+          } else {
+            clearTimeout(timer); deleteNotePermanently(note.id); renderHomeScreen(); showToast('Η σημείωση διαγράφηκε οριστικά');
+          }
+        });
+        actions.addEventListener('click', (e) => e.stopPropagation());
+        card.appendChild(actions);
+      }
+
+      card.addEventListener('click', () => switchView('fullscreen', note.id));
+      card.addEventListener('keydown', (e) => { if (e.key === 'Enter') switchView('fullscreen', note.id); });
+      notesListGrid.appendChild(card);
+    });
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Clipboard
+   * ------------------------------------------------------------------ */
+  function getVisibleBoardNotes() {
+    const board = getActiveBoard();
+    if (!board) {
+      return notes.filter((n) => !n.archived).map((n) => ({
+        id: n.id, note: n, layoutTarget: n, x: n.x, y: n.y, width: n.width || 310, height: n.height || 260, zIndex: n.zIndex || 1
+      }));
+    }
+    const result = [];
+    (board.items || []).forEach((item) => {
+      const note = notes.find((n) => n.id === item.noteId);
+      if (note && !note.archived) {
+        result.push({ id: note.id, note, layoutTarget: item, x: item.x, y: item.y, width: item.width || 310, height: item.height || 260, zIndex: item.zIndex || 1 });
+      }
+    });
+    return result;
+  }
+
+  function renderAllClipboardNotes() {
+    deskCanvas.innerHTML = '';
+    getVisibleBoardNotes().forEach((entry) => {
+      if ((entry.zIndex || 1) > topZIndex) topZIndex = entry.zIndex;
+      createNoteElement(entry.note, entry.layoutTarget);
+    });
+  }
+
+  function syncToolbarFromNote(note) {
+    fontSelect.value = note.font || 'font-caveat';
+    paperSelect.value = note.paperStyle || 'paper-lined';
+    fontSizeRange.value = note.fontSize || 25;
+
+    marginToggleBtn.classList.toggle('active', note.margin !== false);
+    marginToggleBtn.style.opacity = note.margin !== false ? 1 : 0.4;
+
+    const activeInk = (note.inkColor || '#1d4ed8').toLowerCase();
+    inkPalette.querySelectorAll('.ink-btn').forEach((btn) => btn.classList.toggle('sel', (btn.dataset.ink || '').toLowerCase() === activeInk));
+
+    const activePaper = (note.paperBg || '#fdfbf7').toLowerCase();
+    let matched = false;
+    paperColorPalette.querySelectorAll('.paper-color-btn').forEach((btn) => {
+      const m = (btn.dataset.paperBg || '').toLowerCase() === activePaper;
+      if (m) matched = true;
+      btn.classList.toggle('sel', m);
+    });
+    if (matched) { customPaperBtn.style.backgroundColor = ''; customPaperBtn.classList.remove('sel'); }
+    else { customPaperBtn.style.backgroundColor = note.paperBg; customPaperBtn.classList.add('sel'); customPaperColorInput.value = note.paperBg; }
+
+    const activeAlign = note.align || 'left';
+    alignmentGroup.querySelectorAll('.align-btn').forEach((btn) => btn.classList.toggle('active', btn.dataset.align === activeAlign));
+
+    deleteIcon.className = note.archived ? 'fa-solid fa-box-open' : 'fa-solid fa-box-archive';
+    deleteNoteBtn.title = note.archived ? 'Επαναφορά από το Αρχείο' : 'Αρχειοθέτηση (μπορείς να την αναιρέσεις)';
+  }
+
+  function setActiveNote(id, focusEditor) {
+    const note = notes.find((n) => n.id === id);
+    if (!note) return;
+    if (activeNoteId !== id) savedRange = null;
+    activeNoteId = id;
+
+    topZIndex += 1;
+    const board = getActiveBoard();
+    if (board) {
+      const bi = (board.items || []).find((it) => it.noteId === id);
+      if (bi) bi.zIndex = topZIndex;
+    } else {
+      note.zIndex = topZIndex;
+    }
+    deskCanvas.querySelectorAll('.paper-sheet').forEach((el) => {
+      const m = el.dataset.id === id;
+      el.classList.toggle('is-active', m);
+      if (m) el.style.zIndex = String(topZIndex);
+    });
+    syncToolbarFromNote(note);
+    if (focusEditor) {
+      const ed = getActiveEditorEl();
+      if (ed && document.activeElement !== ed) ed.focus();
+    }
+  }
+
+  function renderNoteStyles(note, sheetEl, isFullscreen, spatial) {
+    if (!sheetEl) return;
+    const editorEl = sheetEl.querySelector('.note-editor');
+    const ruled = sheetEl.querySelector('.ruled');
+    const size = Number(note.fontSize || 25);
+    const lh = Math.round(size * 1.42);
+    const pos = spatial || note;
+
+    if (!isFullscreen) {
+      sheetEl.style.left = Math.round(pos.x) + 'px';
+      sheetEl.style.top = Math.round(pos.y) + 'px';
+      sheetEl.style.width = Math.round(pos.width || 310) + 'px';
+      sheetEl.style.minHeight = Math.round(pos.height || 260) + 'px';
+      sheetEl.style.zIndex = String(pos.zIndex || 1);
+    }
+
+    const bg = note.paperBg || '#fdfbf7';
+    const dark = isColorDark(bg);
+    sheetEl.style.setProperty('--paper-bg', bg);
+    sheetEl.style.setProperty('--line-step', lh + 'px');
+    sheetEl.style.setProperty('--rule-line', dark ? 'rgba(255,255,255,.14)' : 'rgba(30,58,138,.15)');
+    sheetEl.style.setProperty('--margin-line', dark ? 'rgba(248,113,113,.35)' : 'rgba(220,38,38,.30)');
+
+    if (ruled) {
+      ruled.classList.remove(...PAPER_CLASSES);
+      ruled.classList.add(note.paperStyle || 'paper-lined');
+      ruled.classList.toggle('notebook-margin', note.margin !== false);
+    }
+    if (editorEl) {
+      editorEl.classList.remove(...FONT_CLASSES);
+      editorEl.classList.add(note.font || 'font-caveat');
+      editorEl.style.color = note.inkColor || '#1d4ed8';
+      editorEl.style.fontSize = size + 'px';
+      editorEl.style.lineHeight = lh + 'px';
+      editorEl.style.textAlign = note.align || 'left';
+    }
+    const t = sheetEl.querySelector('.title-input');
+    if (t) {
+      t.classList.remove(...FONT_CLASSES);
+      t.classList.add(note.font || 'font-caveat');
+      t.style.color = note.inkColor || '#1d4ed8';
+      t.style.fontSize = Math.round(size * 1.3) + 'px';
+      t.style.borderBottomColor = dark ? 'rgba(255,255,255,.25)' : 'rgba(120,113,108,.35)';
+    }
+    if (isFullscreen) {
+      fsFoot.style.color = dark ? '#d6d3d1' : '';
+      tagInput.style.color = dark ? '#f5f5f4' : '';
+    }
+  }
+
+  function createNoteElement(note, layoutTarget) {
+    const target = layoutTarget || note;
+    const board = getActiveBoard();
+    const sheet = document.createElement('article');
+    sheet.className = 'paper-sheet clip';
+    sheet.dataset.id = note.id;
+    sheet.innerHTML = '<div class="paper-texture"></div>';
+
+    const strip = document.createElement('div');
+    strip.className = 'paper-drag-strip no-print';
+    strip.title = 'Σύρετε για μετακίνηση του χαρτιού';
+    strip.innerHTML =
+      '<span class="strip-title">' + esc(note.title || '') + '</span><span class="grip"></span>' +
+      '<span class="strip-btns"><button type="button" class="open-fs" title="Άνοιγμα σε πλήρη οθόνη"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>' +
+      (board ? '<button type="button" class="rm-board" title="Αφαίρεση από αυτό το Clipboard"><i class="fa-solid fa-xmark"></i></button>' : '') + '</span>';
+    sheet.appendChild(strip);
+
+    const ruled = document.createElement('div');
+    ruled.className = 'ruled paper-lined notebook-margin';
+    const editor = document.createElement('div');
+    editor.className = 'note-editor font-caveat';
+    editor.contentEditable = 'true';
+    editor.spellcheck = true;
+    editor.setAttribute('role', 'textbox');
+    editor.setAttribute('aria-multiline', 'true');
+    editor.setAttribute('aria-label', 'Χειρόγραφη σημείωση');
+    editor.innerHTML = note.html || '';
+    ruled.appendChild(editor);
+    sheet.appendChild(ruled);
+
+    const grip = document.createElement('div');
+    grip.className = 'paper-resize-handle no-print';
+    grip.innerHTML = '<svg width="10" height="10" viewBox="0 0 10 10"><path d="M9 1L1 9M9 5L5 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>';
+    sheet.appendChild(grip);
+
+    strip.querySelectorAll('button').forEach((b) => b.addEventListener('pointerdown', (e) => e.stopPropagation()));
+    strip.querySelector('.open-fs').addEventListener('click', (e) => { e.stopPropagation(); switchView('fullscreen', note.id); });
+    const rm = strip.querySelector('.rm-board');
+    if (rm) rm.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const b = getActiveBoard(); if (!b) return;
+      b.items = (b.items || []).filter((it) => it.noteId !== note.id);
+      sheet.remove(); saveAllNotes(true); showToast('Αφαιρέθηκε από το Clipboard');
+    });
+
+    ['n', 's', 'e', 'w', 'nw', 'ne', 'sw', 'se'].forEach((dir) => {
+      const edgeEl = document.createElement('div');
+      edgeEl.className = 'resize-edge resize-' + dir + ' no-print';
+      sheet.appendChild(edgeEl);
+      edgeEl.addEventListener('pointerdown', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        setActiveNote(note.id, false);
+        const startX = e.clientX, startY = e.clientY;
+        const oX = target.x, oY = target.y, oW = target.width || sheet.offsetWidth, oH = target.height || sheet.offsetHeight;
+        const minW = 190, minH = 140;
+        sheet.classList.add('is-dragging');
+        edgeEl.setPointerCapture(e.pointerId);
+        const onMove = (ev) => {
+          const dx = (ev.clientX - startX) / viewScale, dy = (ev.clientY - startY) / viewScale;
+          let nX = oX, nY = oY, nW = oW, nH = oH;
+          if (dir.includes('e')) nW = Math.max(minW, oW + dx);
+          if (dir.includes('s')) nH = Math.max(minH, oH + dy);
+          if (dir.includes('w')) {
+            const p = oW - dx;
+            if (p >= minW) { nW = p; nX = Math.max(20, oX + dx); } else { nW = minW; nX = oX + (oW - minW); }
+          }
+          if (dir.includes('n')) {
+            const p = oH - dy;
+            if (p >= minH) { nH = p; nY = Math.max(20, oY + dy); } else { nH = minH; nY = oY + (oH - minH); }
+          }
+          target.x = nX; target.y = nY; target.width = nW; target.height = nH;
+          sheet.style.left = Math.round(nX) + 'px'; sheet.style.top = Math.round(nY) + 'px';
+          sheet.style.width = Math.round(nW) + 'px'; sheet.style.minHeight = Math.round(nH) + 'px';
+        };
+        const onUp = (ev) => {
+          sheet.classList.remove('is-dragging');
+          try { edgeEl.releasePointerCapture(ev.pointerId); } catch (err) { /* */ }
+          edgeEl.removeEventListener('pointermove', onMove);
+          edgeEl.removeEventListener('pointerup', onUp);
+          edgeEl.removeEventListener('pointercancel', onUp);
+          saveAllNotes(true);
+        };
+        edgeEl.addEventListener('pointermove', onMove);
+        edgeEl.addEventListener('pointerup', onUp);
+        edgeEl.addEventListener('pointercancel', onUp);
+      });
+    });
+
+    deskCanvas.appendChild(sheet);
+    renderNoteStyles(note, sheet, false, target);
+
+    sheet.addEventListener('pointerdown', (e) => {
+      e.stopPropagation();
+      if (activeNoteId !== note.id) { setActiveNote(note.id, false); saveAllNotes(false); }
+    });
+    editor.addEventListener('focus', () => { if (activeNoteId !== note.id) setActiveNote(note.id, false); });
+    wireEditor(editor, () => note, () => { /* no footer in clipboard */ });
+
+    strip.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('button')) return;
+      e.preventDefault(); e.stopPropagation();
+      setActiveNote(note.id, false);
+      const startX = e.clientX, startY = e.clientY, oX = target.x, oY = target.y;
+      sheet.classList.add('is-dragging');
+      strip.setPointerCapture(e.pointerId);
+      const onMove = (ev) => {
+        target.x = Math.max(20, Math.min(9600, oX + (ev.clientX - startX) / viewScale));
+        target.y = Math.max(20, Math.min(9600, oY + (ev.clientY - startY) / viewScale));
+        sheet.style.left = Math.round(target.x) + 'px';
+        sheet.style.top = Math.round(target.y) + 'px';
+      };
+      const onUp = (ev) => {
+        sheet.classList.remove('is-dragging');
+        try { strip.releasePointerCapture(ev.pointerId); } catch (err) { /* */ }
+        strip.removeEventListener('pointermove', onMove);
+        strip.removeEventListener('pointerup', onUp);
+        strip.removeEventListener('pointercancel', onUp);
+        saveAllNotes(true);
+      };
+      strip.addEventListener('pointermove', onMove);
+      strip.addEventListener('pointerup', onUp);
+      strip.addEventListener('pointercancel', onUp);
+    });
+    return sheet;
+  }
+
+  // Κοινοί χειριστές για κάθε editor (clipboard & fullscreen)
+  function wireEditor(editor, getNote, onChange) {
+    editor.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+      document.execCommand('insertText', false, text);
+    });
+    editor.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') { e.preventDefault(); document.execCommand('insertText', false, '    '); return; }
+      if (!e.ctrlKey && !e.metaKey && (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Enter')) {
+        playPenScratch();
+        document.body.classList.add('is-writing');
+        clearTimeout(typingIdleTimer);
+        typingIdleTimer = setTimeout(() => document.body.classList.remove('is-writing'), 1800);
+      }
+    });
+    editor.addEventListener('input', () => {
+      const note = getNote();
+      if (!note) return;
+      note.html = editor.innerHTML;
+      touch(note);
+      onChange();
+      saveAllNotes(false);
+    });
+  }
+
+  function autoArrangeVisibleNotes() {
+    const visible = getVisibleBoardNotes();
+    if (visible.length === 0) return;
+    const cols = Math.max(2, Math.min(5, Math.ceil(Math.sqrt(visible.length))));
+    const colWidth = 340, rowGap = 36;
+    const heights = new Array(cols).fill(WORLD_ORIGIN + 90);
+    visible.forEach((entry) => {
+      let c = 0;
+      for (let i = 1; i < cols; i++) if (heights[i] < heights[c]) c = i;
+      const el = deskCanvas.querySelector('.paper-sheet[data-id="' + entry.id + '"]');
+      const h = el ? el.offsetHeight : (entry.height || 260);
+      entry.layoutTarget.x = WORLD_ORIGIN + 70 + c * colWidth;
+      entry.layoutTarget.y = heights[c];
+      entry.layoutTarget.width = 310;
+      if (el) {
+        el.style.left = Math.round(entry.layoutTarget.x) + 'px';
+        el.style.top = Math.round(entry.layoutTarget.y) + 'px';
+        el.style.width = '310px';
+      }
+      heights[c] += h + rowGap;
+    });
+    saveAllNotes(true);
+    fitVisibleNotesInView(getVisibleBoardNotes());
+    showToast('Τακτοποιήθηκαν χωρίς να επικαλύπτονται');
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Δημιουργία / διπλασιασμός / αρχειοθέτηση / διαγραφή
+   * ------------------------------------------------------------------ */
+  function addNewNote(initialHtml, customWorldPos, openInFullscreen) {
+    topZIndex += 1;
+    const shade = NEW_NOTE_SHADES[newNoteColorIdx % NEW_NOTE_SHADES.length];
+    newNoteColorIdx += 1;
+    const cx = (window.innerWidth / 2 - viewPanX) / viewScale - 155;
+    const cy = (window.innerHeight / 2 - viewPanY) / viewScale - 130;
+    const jitter = (notes.length % 5) * 24;
+    const spawnX = customWorldPos ? customWorldPos.x : Math.max(40, cx + jitter);
+    const spawnY = customWorldPos ? customWorldPos.y : Math.max(60, cy + jitter);
+    const now = Date.now();
+
+    const newNote = normalizeNote({
+      id: newId(), x: spawnX, y: spawnY, width: 310, height: 260, zIndex: topZIndex,
+      html: initialHtml || '', paperBg: shade, createdAt: now, updatedAt: now
+    }, 0);
+    notes.unshift(newNote);
+
+    const board = getActiveBoard();
+    let layoutTarget = newNote;
+    if (board) {
+      layoutTarget = { noteId: newNote.id, x: spawnX, y: spawnY, width: 310, height: 260, zIndex: topZIndex };
+      board.items.push(layoutTarget);
+    }
+    saveAllNotes(true);
+
+    if (openInFullscreen) { switchView('fullscreen', newNote.id); }
+    else { createNoteElement(newNote, layoutTarget); setActiveNote(newNote.id, true); }
+    return newNote;
+  }
+
+  function duplicateActiveNote() {
+    const src = getActiveNote();
+    if (!src) return;
+    flushActiveEditorsToState();
+    const now = Date.now();
+    const copy = normalizeNote(JSON.parse(JSON.stringify(src)), 0);
+    copy.id = newId();
+    copy.title = (src.title ? src.title + ' ' : '') + '(αντίγραφο)';
+    copy.createdAt = now; copy.updatedAt = now; copy.archived = false;
+    topZIndex += 1; copy.zIndex = topZIndex;
+    copy.x = src.x + 40; copy.y = src.y + 40;
+    notes.unshift(copy);
+
+    const board = getActiveBoard();
+    let layoutTarget = copy;
+    if (board) {
+      const sp = (board.items || []).find((it) => it.noteId === src.id);
+      layoutTarget = { noteId: copy.id, x: (sp ? sp.x : copy.x) + 40, y: (sp ? sp.y : copy.y) + 40, width: sp ? sp.width : copy.width, height: sp ? sp.height : copy.height, zIndex: topZIndex };
+      board.items.push(layoutTarget);
+    }
+    saveAllNotes(true);
+    if (currentView === 'fullscreen') { switchView('fullscreen', copy.id); }
+    else { createNoteElement(copy, layoutTarget); setActiveNote(copy.id, false); }
+    showToast('Η σημείωση διπλασιάστηκε');
+  }
+
+  function deleteNotePermanently(id) {
+    notes = notes.filter((n) => n.id !== id);
+    namedBoards.forEach((b) => { b.items = (b.items || []).filter((it) => it.noteId !== id); });
+    if (activeNoteId === id) activeNoteId = null;
+    saveAllNotes(true);
+  }
+
+  function archiveOrRestoreActive() {
+    const note = getActiveNote();
+    if (!note) return;
+    flushActiveEditorsToState();
+
+    if (note.archived) { // Επαναφορά (π.χ. από fullscreen αρχειοθετημένης)
+      note.archived = false;
+      saveAllNotes(true);
+      syncToolbarFromNote(note);
+      showToast('Η σημείωση επανήλθε από το Αρχείο');
+      return;
+    }
+
+    note.archived = true;
+    saveAllNotes(true);
+    const id = note.id;
+
+    if (currentView === 'fullscreen') {
+      switchView('list');
+    } else {
+      const sheetEl = getActiveSheetEl();
+      if (sheetEl) sheetEl.remove();
+      const visible = getVisibleBoardNotes();
+      if (visible.length) setActiveNote(visible[0].id, false); else activeNoteId = null;
+    }
+
+    showToast('Η σημείωση μπήκε στο Αρχείο', {
+      label: 'Αναίρεση',
+      fn: () => {
+        const n = notes.find((x) => x.id === id);
+        if (!n) return;
+        n.archived = false;
+        saveAllNotes(true);
+        if (currentView === 'clipboard') {
+          renderAllClipboardNotes();
+          if (getVisibleBoardNotes().some((v) => v.id === id)) setActiveNote(id, false);
+        } else if (currentView === 'list') {
+          renderHomeScreen();
+        }
+        showToast('Η σημείωση επανήλθε');
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Fullscreen: τίτλος, ετικέτες, στατιστικά
+   * ------------------------------------------------------------------ */
+  function updateFsFoot() {
+    const note = getActiveNote();
+    if (!note) return;
+    const words = countWords(plainText(fullscreenEditor.innerHTML));
+    fsFoot.innerHTML =
+      '<span><i class="fa-regular fa-clock"></i>~' + fmtTime(words) + ' σκηνικός χρόνος</span>' +
+      '<span>' + words + ' λέξεις</span>' +
+      '<span>Δημιουργήθηκε ' + fmtDate(note.createdAt) + '</span>' +
+      '<span>Τελευταία αλλαγή ' + fmtDateTime(note.updatedAt) + '</span>';
+  }
+
+  function renderTagChips(note) {
+    tagChips.innerHTML = '';
+    note.tags.forEach((t, i) => {
+      const chip = document.createElement('span');
+      chip.className = 'tag';
+      chip.innerHTML = '#' + esc(t) + '<button type="button" class="no-print" title="Αφαίρεση" aria-label="Αφαίρεση ετικέτας"><i class="fa-solid fa-xmark"></i></button>';
+      chip.querySelector('button').addEventListener('click', () => {
+        note.tags.splice(i, 1); touch(note); renderTagChips(note); saveAllNotes(true); updateFsFoot();
+      });
+      tagChips.appendChild(chip);
+    });
+    const dark = isColorDark(note.paperBg);
+    tagChips.querySelectorAll('.tag').forEach((c) => { if (dark) { c.style.background = 'rgba(255,255,255,.14)'; c.style.color = '#e7e5e4'; } });
+    const all = new Set();
+    notes.forEach((n) => n.tags.forEach((t) => all.add(t)));
+    allTagsList.innerHTML = Array.from(all).map((t) => '<option value="' + esc(t) + '"></option>').join('');
+  }
+
+  function addTagToNote(note, raw) {
+    const clean = String(raw || '').trim().replace(/^#+/, '').replace(/[,;]+$/, '').trim().slice(0, 30);
+    if (!clean) return false;
+    if (note.tags.some((t) => norm(t) === norm(clean))) return false;
+    note.tags.push(clean); touch(note);
+    return true;
+  }
+
+  titleInput.addEventListener('input', () => {
+    const note = getActiveNote(); if (!note) return;
+    note.title = titleInput.value; touch(note); saveAllNotes(false); updateFsFoot();
+  });
+  titleInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); fullscreenEditor.focus(); }
+  });
+  tagInput.addEventListener('keydown', (e) => {
+    const note = getActiveNote(); if (!note) return;
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      if (addTagToNote(note, tagInput.value)) { renderTagChips(note); saveAllNotes(true); updateFsFoot(); }
+      tagInput.value = '';
+    } else if (e.key === 'Backspace' && !tagInput.value && note.tags.length) {
+      note.tags.pop(); touch(note); renderTagChips(note); saveAllNotes(true); updateFsFoot();
+    }
+  });
+  tagInput.addEventListener('blur', () => {
+    const note = getActiveNote(); if (!note) return;
+    if (tagInput.value.trim() && addTagToNote(note, tagInput.value)) { renderTagChips(note); saveAllNotes(true); updateFsFoot(); }
+    tagInput.value = '';
+  });
+  tagInput.addEventListener('change', () => { /* datalist επιλογή */
+    const note = getActiveNote(); if (!note) return;
+    if (tagInput.value.trim() && addTagToNote(note, tagInput.value)) { renderTagChips(note); saveAllNotes(true); updateFsFoot(); tagInput.value = ''; }
+  });
+
+  wireEditor(fullscreenEditor, getActiveNote, updateFsFoot);
+
+  /* ------------------------------------------------------------------ *
+   * Μορφοποίηση: επιλογή κειμένου ή όλη η σημείωση
+   * ------------------------------------------------------------------ */
+  document.addEventListener('selectionchange', () => {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0) return;
+    const r = sel.getRangeAt(0);
+    const ed = getActiveEditorEl();
+    if (ed && ed.contains(r.commonAncestorContainer)) savedRange = r.cloneRange();
+  });
+  function hasSelection() {
+    const ed = getActiveEditorEl();
+    return !!(ed && savedRange && !savedRange.collapsed && ed.contains(savedRange.commonAncestorContainer));
+  }
+  function restoreSelection() {
+    const ed = getActiveEditorEl();
+    if (!ed || !savedRange) return false;
+    ed.focus();
+    const sel = window.getSelection();
+    sel.removeAllRanges(); sel.addRange(savedRange);
+    return true;
+  }
+  function syncActiveEditorHtml() {
+    const note = getActiveNote(), ed = getActiveEditorEl();
+    if (note && ed) { note.html = ed.innerHTML; touch(note); saveAllNotes(false); if (currentView === 'fullscreen') updateFsFoot(); }
+  }
+  function selectionFontSize() {
+    const sel = window.getSelection();
+    let node = sel && sel.anchorNode;
+    if (node && node.nodeType === 3) node = node.parentNode;
+    const px = node ? parseFloat(getComputedStyle(node).fontSize) : NaN;
+    return Number.isNaN(px) ? 25 : px;
+  }
+  function restyle(note) {
+    renderNoteStyles(note, getActiveSheetEl(), currentView === 'fullscreen', spatialFor(note));
+    syncToolbarFromNote(note);
+  }
+
+  function applyInkColor(hex, notify) {
+    const note = getActiveNote(); if (!note) return;
+    if (hasSelection() && restoreSelection()) {
+      document.execCommand('styleWithCSS', false, true);
+      document.execCommand('foreColor', false, hex);
+      syncActiveEditorHtml();
+      if (notify) showToast('Χρώμα μελανιού: μόνο στην επιλογή');
+      return;
+    }
+    note.inkColor = hex; touch(note); restyle(note); saveAllNotes(true);
+    if (notify) showToast('Άλλαξε το χρώμα μελανιού');
+  }
+
+  function applyFont(cls) {
+    const note = getActiveNote(); if (!note) return;
+    if (hasSelection() && restoreSelection()) {
+      document.execCommand('styleWithCSS', false, true);
+      document.execCommand('fontName', false, FONT_FAMILIES[cls] || 'Caveat');
+      syncActiveEditorHtml();
+      fontSelect.value = note.font;
+      showToast('Γραμματοσειρά: μόνο στην επιλογή');
+      return;
+    }
+    note.font = cls; touch(note); restyle(note); saveAllNotes(true);
+    showToast('Άλλαξε η γραμματοσειρά');
+  }
+
+  function applySizeToSelection(px) {
+    if (!restoreSelection()) return false;
+    const ed = getActiveEditorEl();
+    document.execCommand('styleWithCSS', false, false);
+    document.execCommand('fontSize', false, '7');
+    ed.querySelectorAll('font[size="7"]').forEach((f) => { f.removeAttribute('size'); f.style.fontSize = px + 'px'; });
+    document.execCommand('styleWithCSS', false, true);
+    syncActiveEditorHtml();
+    return true;
+  }
+  function applyFontSize(px, notify) {
+    const note = getActiveNote(); if (!note) return;
+    const clamped = Math.max(18, Math.min(42, Number(px)));
+    note.fontSize = clamped; touch(note);
+    fontSizeRange.value = clamped;
+    restyle(note); saveAllNotes(true);
+    if (notify) showToast('Μέγεθος γραφής: ' + clamped + 'px');
+  }
+  function bumpFontSize(delta) {
+    const note = getActiveNote(); if (!note) return;
+    if (hasSelection()) {
+      const px = Math.max(10, Math.min(90, Math.round(selectionFontSize()) + delta));
+      applySizeToSelection(px);
+      showToast('Μέγεθος: ' + px + 'px (μόνο στην επιλογή)');
+    } else {
+      applyFontSize((note.fontSize || 25) + delta, true);
+    }
+  }
+
+  function applyPaperColor(hex, label, notify) {
+    const note = getActiveNote(); if (!note || !hex) return;
+    note.paperBg = hex;
+    const dark = isColorDark(hex);
+    const darkInks = ['#1d4ed8', '#1e3a8a', '#111827'];
+    if (dark && darkInks.includes((note.inkColor || '').toLowerCase())) note.inkColor = '#f5f5f4';
+    else if (!dark && (note.inkColor || '').toLowerCase() === '#f5f5f4') note.inkColor = '#1d4ed8';
+    touch(note); restyle(note); saveAllNotes(true);
+    if (currentView === 'fullscreen') renderTagChips(note);
+    if (notify) showToast('Χαρτί: ' + (label || 'Προσαρμοσμένη Απόχρωση'));
+  }
+  function applyPaperStyle(cls, notify) {
+    const note = getActiveNote(); if (!note) return;
+    note.paperStyle = cls;
+    note.margin = !(cls === 'paper-blank' || cls === 'paper-dotted');
+    touch(note); restyle(note); saveAllNotes(true);
+    if (notify) showToast('Άλλαξε ο τύπος χαρτιού');
+  }
+  function applyTextAlignment(align, notify, allowToggleBack) {
+    const note = getActiveNote(); if (!note) return;
+    const current = note.align || 'left';
+    let target = align;
+    if (allowToggleBack && current === align) target = previousAlign !== align ? previousAlign : 'left';
+    else if (current !== align) previousAlign = current;
+    note.align = target; touch(note); restyle(note); saveAllNotes(true);
+    if (notify) showToast({ left: 'Αριστερή στοίχιση', center: 'Στοίχιση στο κέντρο', right: 'Δεξιά στοίχιση', justify: 'Πλήρης στοίχιση' }[target] || 'Άλλαξε η στοίχιση');
+  }
+
+  function isSelectionHighlighted(editorEl) {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0) return false;
+    let node = sel.anchorNode;
+    while (node && node !== editorEl) {
+      if (node.nodeType === 1) {
+        const bg = node.style && node.style.backgroundColor;
+        if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'inherit') return true;
+      }
+      node = node.parentNode;
+    }
+    return false;
+  }
+  function toggleHighlight() {
+    const note = getActiveNote(), editor = getActiveEditorEl();
+    if (!note || !editor) return;
+    if (!hasSelection()) { showToast('Επίλεξε πρώτα κείμενο για highlight'); return; }
+    restoreSelection();
+    document.execCommand('styleWithCSS', false, true);
+    if (isSelectionHighlighted(editor)) {
+      document.execCommand('hiliteColor', false, 'transparent');
+      document.execCommand('backColor', false, 'transparent');
+      showToast('Αφαιρέθηκε το highlight');
+    } else {
+      const marker = isColorDark(note.paperBg) ? 'rgba(250,204,21,.35)' : 'rgba(254,240,138,.88)';
+      document.execCommand('hiliteColor', false, marker);
+      showToast('Έγινε highlight');
+    }
+    syncActiveEditorHtml();
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Picker modal (επιλογή σημειώσεων για Clipboard)
+   * ------------------------------------------------------------------ */
+  function openNotePickerModal(existingBoard) {
+    pickerTargetBoardId = existingBoard ? existingBoard.id : null;
+    modalBoardNameInput.value = existingBoard ? existingBoard.name : 'Clipboard #' + (namedBoards.length + 1);
+    pickerSearchInput.value = '';
+    pickerSelectedIds = new Set(existingBoard ? (existingBoard.items || []).map((it) => it.noteId) : []);
+    renderPickerNotesGrid();
+    notePickerModal.classList.remove('hidden');
+    setTimeout(() => { modalBoardNameInput.focus(); modalBoardNameInput.select(); }, 30);
+  }
+  function closeNotePickerModal() { notePickerModal.classList.add('hidden'); }
+
+  function pickerPool() {
+    const q = norm(pickerSearchInput.value || '').trim();
+    return notes.filter((n) => !n.archived && (!q || norm((n.title || '') + ' ' + n.tags.join(' ') + ' ' + plainText(n.html)).includes(q)));
+  }
+  function renderPickerNotesGrid() {
+    pickerNotesGrid.innerHTML = '';
+    pickerSelectedCount.textContent = pickerSelectedIds.size + ' επιλεγμένες';
+    pickerPool().forEach((note) => {
+      const sel = pickerSelectedIds.has(note.id);
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'pick' + (sel ? ' sel' : '');
+      card.style.backgroundColor = note.paperBg;
+      const text = plainText(note.html);
+      card.innerHTML =
+        '<span class="pb">' + (sel ? '<i class="fa-solid fa-check"></i>' : '') + '</span>' +
+        '<div class="pt ' + note.font + '" style="color:' + esc(note.inkColor) + '">' + (note.title ? esc(note.title) : '') + '</div>' +
+        '<div class="px ' + note.font + '" style="color:' + esc(note.inkColor) + '">' + (text ? esc(text.slice(0, 120)) : '<span style="opacity:.4;font-style:italic">Κενό χαρτί...</span>') + '</div>';
+      card.addEventListener('click', () => {
+        if (pickerSelectedIds.has(note.id)) pickerSelectedIds.delete(note.id); else pickerSelectedIds.add(note.id);
+        renderPickerNotesGrid();
+      });
+      pickerNotesGrid.appendChild(card);
+    });
+  }
+  function confirmNotePickerSelection() {
+    const boardName = (modalBoardNameInput.value || '').trim() || 'Clipboard #' + (namedBoards.length + 1);
+    const selected = Array.from(pickerSelectedIds);
+    let board = pickerTargetBoardId ? namedBoards.find((b) => b.id === pickerTargetBoardId) : null;
+    if (!board) {
+      board = { id: 'board_' + Date.now(), name: boardName, items: [], camera: null };
+      namedBoards.unshift(board);
+    } else {
+      board.name = boardName;
+    }
+    const existing = new Map((board.items || []).map((it) => [it.noteId, it]));
+    const cols = Math.max(2, Math.min(4, Math.ceil(Math.sqrt(Math.max(1, selected.length)))));
+    let ni = 0;
+    board.items = selected.map((noteId, idx) => {
+      if (existing.has(noteId)) return existing.get(noteId);
+      const col = ni % cols, row = Math.floor(ni / cols); ni += 1;
+      return { noteId, x: WORLD_ORIGIN + 80 + col * 345, y: WORLD_ORIGIN + 95 + row * 300, width: 310, height: 260, zIndex: idx + 1 };
+    });
+    if (!pickerTargetBoardId) board.camera = null;
+    saveAllNotes(true);
+    closeNotePickerModal();
+    switchView('clipboard', null, board.id);
+    showToast('Αποθηκεύτηκε το "' + board.name + '"');
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Αντίγραφο ασφαλείας: εξαγωγή / εισαγωγή
+   * ------------------------------------------------------------------ */
+  function exportBackup() {
+    saveAllNotes(true);
+    const data = { app: 'greek-standup-notes', version: 2, exportedAt: new Date().toISOString(), notes, boards: namedBoards };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'simeioseis-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    lsSet(BACKUP_KEY, String(Date.now()));
+    bannerDismissed = false;
+    if (currentView === 'list') renderBackupBanner();
+    showToast('Κατέβηκε το αντίγραφο ασφαλείας');
+  }
+
+  function readImportFile(file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(String(reader.result));
+        const inNotes = Array.isArray(data) ? data : data.notes;
+        const inBoards = Array.isArray(data) ? [] : (data.boards || data.namedBoards || []);
+        if (!Array.isArray(inNotes)) throw new Error('bad');
+        pendingImport = { notes: inNotes.filter((n) => n && typeof n === 'object'), boards: Array.isArray(inBoards) ? inBoards.filter((b) => b && typeof b === 'object') : [] };
+        importSummary.textContent = 'Το αρχείο «' + file.name + '» περιέχει ' + pendingImport.notes.length + ' σημειώσεις και ' + pendingImport.boards.length + ' clipboards. Τι θέλεις να γίνει;';
+        importReplaceBtn.textContent = 'Αντικατάσταση όλων';
+        importModal.classList.remove('hidden');
+      } catch (e) {
+        showToast('Το αρχείο δεν είναι έγκυρο αντίγραφο σημειώσεων', null, 3500);
+      }
+    };
+    reader.readAsText(file);
+  }
+  function prepImported() {
+    return {
+      notes: pendingImport.notes.map((n, i) => { const c = Object.assign({}, n); c.html = sanitizeHtml(c.html); return normalizeNote(c, i); }),
+      boards: pendingImport.boards.map((b) => ({
+        id: b.id || ('board_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5)),
+        name: String(b.name || 'Χωρίς όνομα'),
+        items: Array.isArray(b.items) ? b.items.filter((it) => it && it.noteId) : [],
+        camera: b.camera || null
+      }))
+    };
+  }
+  function finishImport(msg) {
+    importModal.classList.add('hidden');
+    pendingImport = null;
+    saveAllNotes(true);
+    renderHomeScreen();
+    showToast(msg);
+  }
+  function doImportMerge() {
+    if (!pendingImport) return;
+    const inc = prepImported();
+    let added = 0, updated = 0;
+    inc.notes.forEach((n) => {
+      const idx = notes.findIndex((x) => x.id === n.id);
+      if (idx === -1) { notes.push(n); added += 1; }
+      else if (n.updatedAt > notes[idx].updatedAt) { notes[idx] = n; updated += 1; }
+    });
+    inc.boards.forEach((b) => {
+      const idx = namedBoards.findIndex((x) => x.id === b.id);
+      if (idx === -1) namedBoards.push(b); else namedBoards[idx] = b;
+    });
+    finishImport('Συγχώνευση: ' + added + ' νέες, ' + updated + ' ενημερωμένες');
+  }
+  function doImportReplace() {
+    if (!pendingImport) return;
+    if (importReplaceBtn.dataset.confirm !== '1') {
+      importReplaceBtn.dataset.confirm = '1';
+      importReplaceBtn.textContent = 'Σίγουρα; Θα σβηστούν τα τωρινά';
+      setTimeout(() => { importReplaceBtn.dataset.confirm = '0'; importReplaceBtn.textContent = 'Αντικατάσταση όλων'; }, 3500);
+      return;
+    }
+    importReplaceBtn.dataset.confirm = '0';
+    const inc = prepImported();
+    notes = inc.notes; namedBoards = inc.boards; activeNoteId = null;
+    finishImport('Αντικαταστάθηκαν όλα με ' + inc.notes.length + ' σημειώσεις');
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Pan / Zoom events (ποντίκι, trackpad, αφή με pinch)
+   * ------------------------------------------------------------------ */
+  clipboardViewport.addEventListener('wheel', (e) => {
+    if (currentView !== 'clipboard') return;
+    e.preventDefault();
+    zoomAtPoint(viewScale * (e.deltaY < 0 ? 1.09 : 0.91), e.clientX, e.clientY);
+  }, { passive: false });
+
+  const ptrs = new Map();
+  let pinch = null;
+  clipboardViewport.addEventListener('pointerdown', (e) => {
+    const isBg = e.target === clipboardViewport || e.target === deskStage || e.target === deskCanvas;
+    if (!isBg && !isSpacePressed) return;
+    e.preventDefault();
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    try { clipboardViewport.setPointerCapture(e.pointerId); } catch (err) { /* */ }
+    clipboardViewport.classList.add('is-panning');
+    if (document.activeElement && document.activeElement.blur && document.activeElement !== document.body) document.activeElement.blur();
+    if (ptrs.size === 2) {
+      const [a, b] = Array.from(ptrs.values());
+      pinch = { dist: Math.hypot(a.x - b.x, a.y - b.y) || 1, scale: viewScale, panX: viewPanX, panY: viewPanY, cx: (a.x + b.x) / 2, cy: (a.y + b.y) / 2 };
+    }
+  });
+  clipboardViewport.addEventListener('pointermove', (e) => {
+    if (!ptrs.has(e.pointerId)) return;
+    const prev = ptrs.get(e.pointerId), cur = { x: e.clientX, y: e.clientY };
+    ptrs.set(e.pointerId, cur);
+    if (ptrs.size === 1) {
+      viewPanX += cur.x - prev.x; viewPanY += cur.y - prev.y; applyStageTransform();
+    } else if (ptrs.size === 2 && pinch) {
+      const [a, b] = Array.from(ptrs.values());
+      const dist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+      const cx = (a.x + b.x) / 2, cy = (a.y + b.y) / 2;
+      const ns = Math.max(0.22, Math.min(2.0, pinch.scale * dist / pinch.dist));
+      const wx = (pinch.cx - pinch.panX) / pinch.scale, wy = (pinch.cy - pinch.panY) / pinch.scale;
+      viewScale = ns; viewPanX = cx - wx * ns; viewPanY = cy - wy * ns;
+      applyStageTransform();
+    }
+  });
+  function endPointer(e) {
+    if (!ptrs.has(e.pointerId)) return;
+    ptrs.delete(e.pointerId);
+    try { clipboardViewport.releasePointerCapture(e.pointerId); } catch (err) { /* */ }
+    if (ptrs.size < 2) pinch = null;
+    if (ptrs.size === 0) { clipboardViewport.classList.remove('is-panning'); saveAllNotes(true); }
+  }
+  clipboardViewport.addEventListener('pointerup', endPointer);
+  clipboardViewport.addEventListener('pointercancel', endPointer);
+
+  deskCanvas.addEventListener('dblclick', (e) => {
+    if (e.target === deskCanvas) {
+      addNewNote('', { x: Math.max(20, (e.clientX - viewPanX) / viewScale - 40), y: Math.max(20, (e.clientY - viewPanY) / viewScale - 20) }, false);
+    }
+  });
+
+  zoomInBtn.addEventListener('click', () => zoomAtPoint(viewScale * 1.15, window.innerWidth / 2, window.innerHeight / 2));
+  zoomOutBtn.addEventListener('click', () => zoomAtPoint(viewScale * 0.85, window.innerWidth / 2, window.innerHeight / 2));
+  fitAllNotesBtn.addEventListener('click', () => { fitVisibleNotesInView(getVisibleBoardNotes()); saveAllNotes(true); });
+  autoArrangeBtn.addEventListener('click', autoArrangeVisibleNotes);
+
+  boardTitleInput.addEventListener('input', () => {
+    const board = getActiveBoard();
+    if (board) { board.name = boardTitleInput.value; saveAllNotes(false); }
+  });
+
+  /* ------------------------------------------------------------------ *
+   * Συμβάντα αρχικής & toolbar
+   * ------------------------------------------------------------------ */
+  homeNewNoteBtn.addEventListener('click', () => addNewNote('', null, true));
+  homeNewBoardBtn.addEventListener('click', () => openNotePickerModal(null));
+  pickNotesForBoardBtn.addEventListener('click', () => { const b = getActiveBoard(); if (b) openNotePickerModal(b); });
+  modeListBtn.addEventListener('click', () => switchView('list'));
+  modeClipboardBtn.addEventListener('click', () => switchView('clipboard', null, null));
+  backToListBtn.addEventListener('click', () => switchView('list'));
+  fullscreenToClipboardBtn.addEventListener('click', () => switchView('clipboard', activeNoteId, null));
+  hideToolbarBtn.addEventListener('click', () => toggleToolbarHidden(true));
+  showToolbarPill.addEventListener('click', () => toggleToolbarHidden(false));
+  addNoteBtn.addEventListener('click', () => addNewNote('', null, false));
+
+  searchInput.addEventListener('input', () => { homeSearch = searchInput.value; renderSequentialListView(); });
+  sortSelect.addEventListener('change', () => { prefs.sort = sortSelect.value; savePrefs(); renderSequentialListView(); });
+  tabActive.addEventListener('click', () => { homeFilter = 'active'; homeTag = null; renderSequentialListView(); });
+  tabArchive.addEventListener('click', () => { homeFilter = 'archived'; homeTag = null; renderSequentialListView(); });
+
+  exportBtn.addEventListener('click', exportBackup);
+  $('bannerExportBtn').addEventListener('click', exportBackup);
+  $('bannerDismissBtn').addEventListener('click', () => { bannerDismissed = true; backupBanner.classList.add('hidden'); });
+  importBtn.addEventListener('click', () => importFile.click());
+  importFile.addEventListener('change', () => { if (importFile.files && importFile.files[0]) readImportFile(importFile.files[0]); importFile.value = ''; });
+  importCancelBtn.addEventListener('click', () => { importModal.classList.add('hidden'); pendingImport = null; });
+  importMergeBtn.addEventListener('click', doImportMerge);
+  importReplaceBtn.addEventListener('click', doImportReplace);
+
+  pickerSearchInput.addEventListener('input', renderPickerNotesGrid);
+  pickerSelectAllBtn.addEventListener('click', () => {
+    const pool = pickerPool();
+    const allSel = pool.length > 0 && pool.every((n) => pickerSelectedIds.has(n.id));
+    pool.forEach((n) => { if (allSel) pickerSelectedIds.delete(n.id); else pickerSelectedIds.add(n.id); });
+    renderPickerNotesGrid();
+  });
+  closeNotePickerBtn.addEventListener('click', closeNotePickerModal);
+  cancelNotePickerBtn.addEventListener('click', closeNotePickerModal);
+  confirmNotePickerBtn.addEventListener('click', confirmNotePickerSelection);
+
+  // Τα κουμπιά του toolbar δεν "κλέβουν" την επιλογή κειμένου
+  minimalToolbar.addEventListener('mousedown', (e) => { if (e.target.closest('button')) e.preventDefault(); });
+
+  highlightBtn.addEventListener('click', (e) => { e.preventDefault(); toggleHighlight(); });
+  fontSelect.addEventListener('change', (e) => applyFont(e.target.value));
+  paperSelect.addEventListener('change', (e) => applyPaperStyle(e.target.value, true));
+  marginToggleBtn.addEventListener('click', () => {
+    const note = getActiveNote(); if (!note) return;
+    note.margin = !(note.margin !== false); touch(note); restyle(note); saveAllNotes(true);
+    showToast(note.margin ? 'Κόκκινο περιθώριο: Ενεργό' : 'Κόκκινο περιθώριο: Ανενεργό');
+  });
+  alignmentGroup.addEventListener('click', (e) => { const b = e.target.closest('.align-btn'); if (b) applyTextAlignment(b.dataset.align, true, false); });
+  inkPalette.addEventListener('click', (e) => { const b = e.target.closest('.ink-btn'); if (b) applyInkColor(b.dataset.ink, true); });
+  paperColorPalette.addEventListener('click', (e) => { const b = e.target.closest('.paper-color-btn'); if (b) applyPaperColor(b.dataset.paperBg, b.dataset.paperName, true); });
+  customPaperColorInput.addEventListener('input', (e) => applyPaperColor(e.target.value, 'Προσαρμοσμένη Απόχρωση', false));
+  customPaperColorInput.addEventListener('change', (e) => applyPaperColor(e.target.value, 'Προσαρμοσμένη Απόχρωση', true));
+
+  fontSizeRange.addEventListener('input', (e) => { if (!hasSelection()) applyFontSize(e.target.value, false); });
+  fontSizeRange.addEventListener('change', (e) => {
+    if (hasSelection()) {
+      applySizeToSelection(Number(e.target.value));
+      const note = getActiveNote(); if (note) fontSizeRange.value = note.fontSize || 25;
+      showToast('Μέγεθος: μόνο στην επιλογή');
+    }
+  });
+  sizeUpBtn.addEventListener('click', () => bumpFontSize(2));
+  sizeDownBtn.addEventListener('click', () => bumpFontSize(-2));
+
+  soundToggleBtn.addEventListener('click', () => {
+    penSoundEnabled = !penSoundEnabled;
+    if (penSoundEnabled) { soundIcon.className = 'fa-solid fa-volume-high'; soundIcon.style.color = '#d97706'; playPenScratch(); showToast('Ήχος στυλό: Ενεργός'); }
+    else { soundIcon.className = 'fa-solid fa-volume-xmark'; soundIcon.style.color = ''; showToast('Ήχος στυλό: Ανενεργός'); }
+  });
+  printBtn.addEventListener('click', () => window.print());
+  duplicateBtn.addEventListener('click', duplicateActiveNote);
+  deleteNoteBtn.addEventListener('click', archiveOrRestoreActive);
+
+  downloadBtn.addEventListener('click', async () => {
+    const sheet = getActiveSheetEl();
+    if (!sheet) return;
+    if (typeof html2canvas === 'undefined') { showToast('Δεν ήταν δυνατή η φόρτωση εξαγωγής'); return; }
+    showToast('Δημιουργία εικόνας χαρτιού...');
+    const controls = sheet.querySelectorAll('.no-print');
+    controls.forEach((el) => { el.style.visibility = 'hidden'; });
+    try {
+      const canvas = await html2canvas(sheet, { scale: 2, useCORS: true, backgroundColor: null });
+      const link = document.createElement('a');
+      const note = getActiveNote();
+      const base = note && note.title ? note.title.replace(/[^\p{L}\p{N}]+/gu, '_').slice(0, 40) : 'xeirografo';
+      link.download = base + '_' + new Date().toISOString().slice(0, 10) + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('Το χαρτί αποθηκεύτηκε ως εικόνα!');
+    } catch (err) {
+      console.error(err); showToast('Σφάλμα κατά την εξαγωγή');
+    } finally {
+      controls.forEach((el) => { el.style.visibility = 'visible'; });
+    }
+  });
+
+  /* ------------------------------------------------------------------ *
+   * Συντομεύσεις πληκτρολογίου
+   * ------------------------------------------------------------------ */
+  document.addEventListener('keyup', (e) => { if (e.code === 'Space') isSpacePressed = false; });
+  document.addEventListener('keydown', (e) => {
+    const tag = document.activeElement ? document.activeElement.tagName : '';
+    const typing = tag === 'INPUT' || tag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable);
+
+    if (e.code === 'Space' && !typing) isSpacePressed = true;
+
+    if (e.key === '/' && currentView === 'list' && !typing && notePickerModal.classList.contains('hidden') && importModal.classList.contains('hidden') && authModal.classList.contains('hidden')) {
+      e.preventDefault(); searchInput.focus(); return;
+    }
+    if (e.key === 'Escape') {
+      if (!authModal.classList.contains('hidden')) { e.preventDefault(); closeAuthModal(); return; }
+      if (!importModal.classList.contains('hidden')) { e.preventDefault(); importModal.classList.add('hidden'); pendingImport = null; return; }
+      if (!notePickerModal.classList.contains('hidden')) { e.preventDefault(); closeNotePickerModal(); return; }
+      if (currentView === 'list') {
+        if (document.activeElement === searchInput && searchInput.value) { searchInput.value = ''; homeSearch = ''; renderSequentialListView(); }
+        return;
+      }
+      e.preventDefault(); switchView('list'); return;
+    }
+
+    const mod = e.ctrlKey || e.metaKey;
+    if (!mod) return;
+    const code = e.code;
+
+    if (e.shiftKey && !e.altKey && code === 'KeyM') { e.preventDefault(); if (currentView !== 'list') toggleToolbarHidden(); return; }
+    if (e.altKey && !e.shiftKey && code === 'KeyN') { e.preventDefault(); addNewNote('', null, currentView !== 'clipboard'); return; }
+    if (currentView === 'list') return;
+
+    if (!e.shiftKey && !e.altKey && code === 'KeyE') { e.preventDefault(); applyTextAlignment('center', true, true); return; }
+    if (!e.shiftKey && !e.altKey && code === 'KeyL') { e.preventDefault(); applyTextAlignment('left', true, false); return; }
+    if (!e.shiftKey && !e.altKey && code === 'KeyR') { e.preventDefault(); applyTextAlignment('right', true, true); return; }
+    if (!e.shiftKey && !e.altKey && code === 'KeyJ') { e.preventDefault(); applyTextAlignment('justify', true, true); return; }
+    if ((e.shiftKey || e.altKey) && code === 'KeyH') { e.preventDefault(); toggleHighlight(); return; }
+    if (e.altKey && e.shiftKey && code === 'Digit5') { e.preventDefault(); document.execCommand('strikeThrough', false, null); syncActiveEditorHtml(); showToast('Διαγράμμιση'); return; }
+    if (!e.shiftKey && !e.altKey && code === 'Backslash') { e.preventDefault(); document.execCommand('removeFormat', false, null); syncActiveEditorHtml(); showToast('Καθαρισμός μορφοποίησης'); return; }
+    if (e.shiftKey && !e.altKey && code === 'Digit7') { e.preventDefault(); document.execCommand('insertOrderedList', false, null); syncActiveEditorHtml(); return; }
+    if (e.shiftKey && !e.altKey && code === 'Digit8') { e.preventDefault(); document.execCommand('insertUnorderedList', false, null); syncActiveEditorHtml(); return; }
+    if (e.shiftKey && !e.altKey && code === 'Period') { e.preventDefault(); bumpFontSize(2); return; }
+    if (e.shiftKey && !e.altKey && code === 'Comma') { e.preventDefault(); bumpFontSize(-2); return; }
+    if (!e.shiftKey && !e.altKey && code === 'KeyS') { e.preventDefault(); downloadBtn.click(); return; }
+    if (!e.shiftKey && !e.altKey && code === 'KeyP') { e.preventDefault(); window.print(); }
+  });
+
+  /* ------------------------------------------------------------------ *
+   * Συγχρονισμός με Supabase
+   *
+   * Κάθε σημείωση και κάθε clipboard είναι μία γραμμή στη βάση.
+   * Τοπικά κρατάμε για καθένα το hash της τελευταίας εκδοχής που
+   * συγχρονίστηκε (h), πότε συγχρονίστηκε (at) και αν έχει αλλάξει
+   * από τότε (dirty = χρόνος αλλαγής). Σε σύγκρουση κερδίζει η πιο
+   * πρόσφατη αλλαγή. Το localStorage μένει η κύρια αποθήκη, οπότε
+   * η εφαρμογή δουλεύει και offline.
+   * ------------------------------------------------------------------ */
+  const SYNC_META_KEY = 'greek_standup_sync_meta_v1';
+  const syncBtn = $('syncBtn'), syncBtnText = $('syncBtnText'), tbSyncBtn = $('tbSyncBtn');
+  const authModal = $('authModal'), authEmail = $('authEmail'), authPassword = $('authPassword'), authMsg = $('authMsg');
+
+  let sb = null, syncUser = null, syncState = 'off', lastSyncAt = 0;
+  let syncMeta = { uid: null, notes: {}, boards: {} };
+  let pushTimer = null, pullTimer = null, pushing = false, pushAgain = false, pulling = false, pullAgain = false;
+  let pendingPull = false, rtChannel = null, pollTimer = null;
+
+  function hashStr(s) {
+    let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+    for (let i = 0; i < s.length; i++) {
+      const c = s.charCodeAt(i);
+      h1 = Math.imul(h1 ^ c, 2654435761); h2 = Math.imul(h2 ^ c, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return (h2 >>> 0).toString(36) + (h1 >>> 0).toString(36);
+  }
+
+  // Τι ανεβαίνει για κάθε είδος (η θέση κάμερας των clipboards μένει ανά συσκευή)
+  const SYNC_KINDS = {
+    notes: {
+      table: 'notes',
+      list: () => notes,
+      ser: (n) => n,
+      prep: (d, id) => { const c = Object.assign({}, d, { id }); c.html = sanitizeHtml(c.html); return normalizeNote(c, 0); }
+    },
+    boards: {
+      table: 'boards',
+      list: () => namedBoards,
+      ser: (b) => ({ id: b.id, name: b.name, items: b.items || [] }),
+      prep: (d, id) => ({
+        id, name: String(d.name || 'Χωρίς όνομα'),
+        items: Array.isArray(d.items) ? d.items.filter((it) => it && it.noteId) : [], camera: null
+      })
+    }
+  };
+  const itemHash = (kind, item) => hashStr(JSON.stringify(SYNC_KINDS[kind].ser(item)));
+
+  function loadSyncMeta() {
+    try { const m = JSON.parse(lsGet(SYNC_META_KEY) || 'null'); if (m && m.notes && m.boards) syncMeta = m; } catch (e) { /* */ }
+  }
+  function saveSyncMeta() { lsSet(SYNC_META_KEY, JSON.stringify(syncMeta)); }
+
+  // Σύγκριση τωρινής κατάστασης με την τελευταία συγχρονισμένη
+  function markDirty() {
+    const now = Date.now();
+    Object.keys(SYNC_KINDS).forEach((kind) => {
+      const meta = syncMeta[kind], seen = new Set();
+      SYNC_KINDS[kind].list().forEach((item) => {
+        seen.add(item.id);
+        const h = itemHash(kind, item);
+        const m = meta[item.id];
+        if (!m) { meta[item.id] = { h: '', lh: h, at: 0, dirty: now }; return; }
+        delete m.del;
+        if (h === m.h) { m.dirty = 0; m.lh = h; }
+        else if (h !== m.lh || !m.dirty) { m.dirty = now; m.lh = h; }
+      });
+      Object.keys(meta).forEach((id) => {
+        if (seen.has(id)) return;
+        if (!meta[id].at) delete meta[id];          // δεν είχε ανέβει ποτέ
+        else if (!meta[id].del) meta[id].del = now; // σβήστηκε εδώ → να σβηστεί και στο cloud
+      });
+    });
+  }
+
+  function setSyncState(state) {
+    syncState = state;
+    const labels = {
+      off: 'Τοπικά', signedout: 'Σύνδεση', ok: 'Συγχρονισμένο', pending: 'Αποθήκευση…',
+      syncing: 'Συγχρονισμός…', error: 'Σφάλμα συγχρ.', offline: 'Εκτός σύνδεσης'
+    };
+    syncBtn.dataset.state = state; tbSyncBtn.dataset.state = state;
+    syncBtnText.textContent = labels[state] || state;
+    tbSyncBtn.title = 'Συγχρονισμός: ' + (labels[state] || state);
+    if (!authModal.classList.contains('hidden')) renderAuthModal();
+  }
+
+  function schedulePush(delay) {
+    if (!sb || !syncUser) return;
+    clearTimeout(pushTimer);
+    if (syncState !== 'syncing') setSyncState('pending');
+    pushTimer = setTimeout(pushNow, delay === undefined ? 1200 : delay);
+  }
+
+  async function pushNow() {
+    if (!sb || !syncUser) return;
+    if (pushing || pulling) { pushAgain = true; return; }
+    pushing = true;
+    setSyncState('syncing');
+    try {
+      flushActiveEditorsToState();
+      markDirty();
+      for (const kind of Object.keys(SYNC_KINDS)) {
+        const meta = syncMeta[kind], byId = new Map(SYNC_KINDS[kind].list().map((it) => [it.id, it]));
+        const rows = [], sent = [];
+        Object.keys(meta).forEach((id) => {
+          const m = meta[id];
+          if (m.del) {
+            rows.push({ user_id: syncUser.id, id, data: {}, updated_at: m.del, deleted: true });
+            sent.push({ id, del: m.del });
+          } else if (m.dirty && byId.has(id)) {
+            rows.push({ user_id: syncUser.id, id, data: SYNC_KINDS[kind].ser(byId.get(id)), updated_at: m.dirty, deleted: false });
+            sent.push({ id, h: m.lh, at: m.dirty });
+          }
+        });
+        for (let i = 0; i < rows.length; i += 200) {
+          const { error } = await sb.from(SYNC_KINDS[kind].table).upsert(rows.slice(i, i + 200), { onConflict: 'user_id,id' });
+          if (error) throw error;
+        }
+        sent.forEach((s) => {
+          const m = meta[s.id];
+          if (!m) return;
+          if (s.del) { if (m.del === s.del) delete meta[s.id]; return; }
+          m.h = s.h; m.at = s.at;
+          if (m.dirty === s.at) m.dirty = 0;
+        });
+      }
+      saveSyncMeta();
+      lastSyncAt = Date.now();
+      setSyncState('ok');
+    } catch (err) {
+      console.warn('Sync push failed:', err);
+      setSyncState(navigator.onLine === false ? 'offline' : 'error');
+    } finally {
+      pushing = false;
+      if (pushAgain) { pushAgain = false; schedulePush(300); }
+    }
+  }
+
+  function isEditingNow() {
+    const a = document.activeElement;
+    return !!(a && (a.isContentEditable || a === titleInput || a === tagInput || a === boardTitleInput));
+  }
+
+  function schedulePull(delay) {
+    if (!sb || !syncUser) return;
+    clearTimeout(pullTimer);
+    pullTimer = setTimeout(pullNow, delay || 0);
+  }
+
+  // Εφαρμογή μιας γραμμής από το cloud. Επιστρέφει true αν άλλαξε κάτι τοπικά.
+  function applyRemoteRow(kind, row) {
+    const meta = syncMeta[kind], m = meta[row.id], at = Number(row.updated_at) || 0;
+    if (m && m.at >= at) return false;                     // το έχουμε ήδη
+    const localChangeAt = m ? (m.del || m.dirty || 0) : 0;
+    if (localChangeAt > at) return false;                  // η τοπική αλλαγή είναι νεότερη· θα ανέβει
+    const arr = SYNC_KINDS[kind].list();
+    const idx = arr.findIndex((x) => x.id === row.id);
+    if (row.deleted) {
+      delete meta[row.id];
+      if (idx === -1) return false;
+      arr.splice(idx, 1);
+      if (kind === 'notes') namedBoards.forEach((b) => { b.items = (b.items || []).filter((it) => it.noteId !== row.id); });
+      return true;
+    }
+    const item = SYNC_KINDS[kind].prep(row.data || {}, row.id);
+    if (kind === 'boards' && idx !== -1) item.camera = arr[idx].camera || null;
+    if (idx !== -1) arr[idx] = item; else if (kind === 'notes') arr.unshift(item); else arr.push(item);
+    const h = itemHash(kind, item);
+    meta[row.id] = { h, lh: h, at, dirty: 0 };
+    return true;
+  }
+
+  async function pullNow() {
+    if (!sb || !syncUser) return;
+    if (isEditingNow()) { pendingPull = true; return; }   // δεν αλλάζουμε το κείμενο ενώ γράφεις
+    if (pulling || pushing) { pullAgain = true; return; }
+    pulling = true; pendingPull = false;
+    setSyncState('syncing');
+    try {
+      flushActiveEditorsToState();
+      markDirty();
+      const fetched = {};
+      for (const kind of Object.keys(SYNC_KINDS)) {
+        fetched[kind] = [];
+        for (let from = 0; ; from += 1000) {
+          const { data, error } = await sb.from(SYNC_KINDS[kind].table)
+            .select('id,data,updated_at,deleted').order('id').range(from, from + 999);
+          if (error) throw error;
+          fetched[kind].push(...(data || []));
+          if (!data || data.length < 1000) break;
+        }
+      }
+      if (isEditingNow()) { pendingPull = true; setSyncState('ok'); return; } // άρχισες να γράφεις στο μεταξύ
+      let changed = false;
+      Object.keys(fetched).forEach((kind) => fetched[kind].forEach((row) => { if (applyRemoteRow(kind, row)) changed = true; }));
+      saveSyncMeta();
+      lastSyncAt = Date.now();
+      setSyncState('ok');
+      if (changed) {
+        lsSet(STORAGE_KEY, JSON.stringify(notes));
+        lsSet(BOARDS_STORAGE_KEY, JSON.stringify(namedBoards));
+        refreshViewAfterRemote();
+      }
+    } catch (err) {
+      console.warn('Sync pull failed:', err);
+      setSyncState(navigator.onLine === false ? 'offline' : 'error');
+    } finally {
+      pulling = false;
+      if (pullAgain) { pullAgain = false; schedulePull(300); }
+      schedulePush(400); // ανεβάζει ό,τι τοπικό εκκρεμεί
+    }
+  }
+
+  // Ξαναζωγραφίζει την τρέχουσα οθόνη ΧΩΡΙΣ να διαβάσει το (παλιό) DOM πίσω στην κατάσταση
+  function refreshViewAfterRemote() {
+    if (activeNoteId && !getActiveNote()) activeNoteId = null;
+    if (currentView === 'list') { renderHomeScreen(); return; }
+    if (currentView === 'fullscreen') {
+      const note = getActiveNote();
+      if (!note) { switchView('list'); showToast('Η σημείωση διαγράφηκε από άλλη συσκευή'); return; }
+      fullscreenEditor.innerHTML = note.html || '';
+      titleInput.value = note.title || '';
+      renderTagChips(note);
+      renderNoteStyles(note, fullscreenPaperSheet, true);
+      syncToolbarFromNote(note);
+      updateFsFoot();
+      return;
+    }
+    if (currentView === 'clipboard') {
+      if (activeBoardId && !getActiveBoard()) { deskCanvas.innerHTML = ''; switchView('list'); return; }
+      const board = getActiveBoard();
+      if (board) boardTitleInput.value = board.name || '';
+      renderAllClipboardNotes();
+      deskCanvas.querySelectorAll('.paper-sheet').forEach((el) => el.classList.toggle('is-active', el.dataset.id === activeNoteId));
+      const n = getActiveNote();
+      if (n) syncToolbarFromNote(n);
+    }
+  }
+
+  function subscribeRealtime() {
+    if (rtChannel) { sb.removeChannel(rtChannel); rtChannel = null; }
+    if (!syncUser || !sb.channel) return;
+    rtChannel = sb.channel('notes-sync-' + syncUser.id);
+    ['notes', 'boards'].forEach((table) => {
+      rtChannel.on('postgres_changes', { event: '*', schema: 'public', table, filter: 'user_id=eq.' + syncUser.id }, () => schedulePull(600));
+    });
+    rtChannel.subscribe();
+  }
+
+  function handleSession(session) {
+    const user = session && session.user ? session.user : null;
+    if ((user && user.id) === (syncUser && syncUser.id)) return;
+    syncUser = user;
+    clearInterval(pollTimer);
+    if (!user) {
+      if (rtChannel) { sb.removeChannel(rtChannel); rtChannel = null; }
+      setSyncState('signedout');
+      return;
+    }
+    if (syncMeta.uid !== user.id) syncMeta = { uid: user.id, notes: {}, boards: {} }; // άλλος λογαριασμός: όλα από την αρχή
+    saveSyncMeta();
+    subscribeRealtime();
+    pollTimer = setInterval(() => schedulePull(0), 60000); // εφεδρικά, αν χαθεί το realtime
+    schedulePull(0);
+  }
+
+  function renderAuthModal() {
+    $('authNotConfigured').classList.toggle('hidden', !!sb);
+    $('authSignedOut').classList.toggle('hidden', !sb || !!syncUser);
+    $('authSignedIn').classList.toggle('hidden', !sb || !syncUser);
+    if (syncUser) {
+      $('authUserEmail').textContent = syncUser.email || '';
+      const stateText = { ok: 'Όλα συγχρονισμένα', pending: 'Υπάρχουν αλλαγές που ανεβαίνουν', syncing: 'Συγχρονισμός…', error: 'Τελευταία προσπάθεια απέτυχε, θα ξαναδοκιμάσει', offline: 'Εκτός σύνδεσης: οι αλλαγές θα ανέβουν όταν επανέλθει' }[syncState] || '';
+      $('authSyncInfo').textContent = stateText + (lastSyncAt ? ' · τελευταίος συγχρονισμός ' + fmtDateTime(lastSyncAt) : '');
+    }
+  }
+  function openAuthModal() {
+    authMsg.textContent = ''; authMsg.classList.remove('err');
+    renderAuthModal();
+    authModal.classList.remove('hidden');
+    if (sb && !syncUser) setTimeout(() => authEmail.focus(), 30);
+  }
+  function closeAuthModal() { authModal.classList.add('hidden'); }
+  function authMessage(text, isErr) { authMsg.textContent = text; authMsg.classList.toggle('err', !!isErr); }
+
+  async function doAuth(signUp) {
+    const email = authEmail.value.trim(), password = authPassword.value;
+    if (!email || password.length < 6) { authMessage('Βάλε email και κωδικό τουλάχιστον 6 χαρακτήρων.', true); return; }
+    authMessage(signUp ? 'Δημιουργία λογαριασμού…' : 'Σύνδεση…');
+    try {
+      const res = signUp
+        ? await sb.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + location.pathname } })
+        : await sb.auth.signInWithPassword({ email, password });
+      if (res.error) {
+        const msg = /invalid login/i.test(res.error.message) ? 'Λάθος email ή κωδικός.'
+          : /not confirmed/i.test(res.error.message) ? 'Επιβεβαίωσε πρώτα το email σου (δες τα εισερχόμενα).'
+          : /already registered/i.test(res.error.message) ? 'Υπάρχει ήδη λογαριασμός με αυτό το email. Πάτα «Σύνδεση».'
+          : res.error.message;
+        authMessage(msg, true); return;
+      }
+      if (signUp && !res.data.session) { authMessage('Σου στείλαμε email επιβεβαίωσης. Πάτα το link και μετά «Σύνδεση».'); return; }
+      authPassword.value = '';
+      closeAuthModal();
+      showToast('Συνδέθηκες, συγχρονισμός…');
+    } catch (err) {
+      authMessage('Δεν υπάρχει σύνδεση με τον server.', true);
+    }
+  }
+
+  function initSync() {
+    loadSyncMeta();
+    syncBtn.addEventListener('click', openAuthModal);
+    tbSyncBtn.addEventListener('click', openAuthModal);
+    authModal.querySelectorAll('.auth-close').forEach((b) => b.addEventListener('click', closeAuthModal));
+    $('authSignInBtn').addEventListener('click', () => doAuth(false));
+    $('authSignUpBtn').addEventListener('click', () => doAuth(true));
+    authPassword.addEventListener('keydown', (e) => { if (e.key === 'Enter') doAuth(false); });
+    $('authSyncNowBtn').addEventListener('click', () => { schedulePull(0); showToast('Συγχρονισμός…'); });
+    $('authSignOutBtn').addEventListener('click', async () => {
+      await pushNow();
+      try { await sb.auth.signOut(); } catch (e) { /* */ }
+      closeAuthModal();
+      showToast('Αποσυνδέθηκες. Οι σημειώσεις μένουν σε αυτόν τον browser.');
+    });
+
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !window.supabase || !window.supabase.createClient) { setSyncState('off'); return; }
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    setSyncState('signedout');
+    // Το Supabase προτείνει να μην καλούνται άλλες μέθοδοί του μέσα σε αυτόν τον callback
+    sb.auth.onAuthStateChange((event, session) => { setTimeout(() => handleSession(session), 0); });
+
+    window.addEventListener('focus', () => schedulePull(0));
+    window.addEventListener('online', () => schedulePull(0));
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') schedulePull(0);
+      else if (syncUser) pushNow();
+    });
+    document.addEventListener('focusout', () => setTimeout(() => { if (pendingPull && !isEditingNow()) schedulePull(0); }, 400));
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Εκκίνηση
+   * ------------------------------------------------------------------ */
+  function initSavedDesk() {
+    try {
+      const raw = lsGet(STORAGE_KEY);
+      if (raw) { const parsed = JSON.parse(raw); if (Array.isArray(parsed)) notes = parsed; }
+      const rawBoards = lsGet(BOARDS_STORAGE_KEY);
+      if (rawBoards) { const pb = JSON.parse(rawBoards); if (Array.isArray(pb)) namedBoards = pb; }
+      const rawPrefs = lsGet(PREFS_KEY);
+      if (rawPrefs) prefs = Object.assign(prefs, JSON.parse(rawPrefs));
+    } catch (err) { console.warn('Could not load saved notes:', err); }
+
+    // Συμπλήρωση νέων πεδίων σε παλιές σημειώσεις (τίτλος, ετικέτες, ημερομηνίες, αρχείο)
+    notes = notes.filter((n) => n && typeof n === 'object');
+    notes.forEach((n, i) => normalizeNote(n, i));
+
+    // Παλιές συντεταγμένες κοντά στο (0,0) → μετακίνηση στο κέντρο του κόσμου
+    let migrated = false;
+    notes.forEach((n) => { if (n.x < 1500) { n.x += WORLD_ORIGIN; n.y += WORLD_ORIGIN; migrated = true; } });
+    namedBoards.forEach((b) => {
+      b.items = Array.isArray(b.items) ? b.items : [];
+      let shifted = false;
+      b.items.forEach((it) => { if (typeof it.x === 'number' && it.x < 1500) { it.x += WORLD_ORIGIN; it.y += WORLD_ORIGIN; shifted = true; migrated = true; } });
+      if (shifted && b.camera) { b.camera.x -= WORLD_ORIGIN * (b.camera.scale || 0.85); b.camera.y -= WORLD_ORIGIN * (b.camera.scale || 0.85); }
+    });
+    saveAllNotes(true); // γράφει και τα νέα πεδία
+
+    window.addEventListener('beforeunload', () => saveAllNotes(true));
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveAllNotes(true); });
+
+    // Ζητά από τον browser να μην σβήσει αυτόματα τα δεδομένα (δεν πειράζει αν δεν υποστηρίζεται)
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) { /* */ }
+
+    const top = [...notes].filter((n) => !n.archived).sort((a, b) => (b.zIndex || 0) - (a.zIndex || 0))[0];
+    if (top) activeNoteId = top.id;
+    initSync();
+    switchView('list');
+  }
+
+  initSavedDesk();
+})();
+</script>
+</body>
+</html>
